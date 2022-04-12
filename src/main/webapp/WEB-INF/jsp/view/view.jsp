@@ -16,14 +16,14 @@
 </security:authorize>
 <br /><br />
 <c:choose>
-    <c:when test="${fn:length(materialDatabase) == 0}">
+    <c:when test="${fn:length(course.materials) == 0}">
         <i>There are no material in the system.</i>
     </c:when>
     <c:otherwise>
-        <c:forEach items="${materialDatabase}" var="material">
+        <c:forEach items="${course.materials}" var="material" varStatus="status">
             Material ${material.id}:
             <a href="<c:url value="/material/view/${material.id}" />">
-                <c:out value="${material.courseTitle}" /></a>
+                <c:out value="${material.materialname}" /></a>
             <br /><br />
         </c:forEach>
     </c:otherwise>

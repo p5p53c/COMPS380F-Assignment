@@ -34,11 +34,6 @@ public class MaterialController {
     @Autowired
     private AttachmentService attachmentService;
 
-    @GetMapping("/create")
-    public ModelAndView create() {
-        return new ModelAndView("add", "materialForm", new Form());
-    }
-
     public static class Form {
         private String materialname;
         private String materialbody;
@@ -67,13 +62,6 @@ public class MaterialController {
         public void setAttachments(List<MultipartFile> attachments) {
             this.attachments = attachments;
         }
-    }
-
-    @PostMapping("/create")
-    public String create(Form form, Principal principal) throws IOException {
-        long materialId = materialService.createMaterial(Long.parseLong(principal.getName()),
-                form.getMaterialname(), form.getMaterialbody(), form.getAttachments());
-        return "redirect:/material/view/" + materialId;
     }
 
     @GetMapping("/view/{materialId}")

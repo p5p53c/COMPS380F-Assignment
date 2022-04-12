@@ -1,10 +1,12 @@
 package hkmu.comps380f.service;
 
 import hkmu.comps380f.dao.AttachmentRepository;
+import hkmu.comps380f.dao.CourseRepository;
 import hkmu.comps380f.dao.MaterialRepository;
 import hkmu.comps380f.exception.AttachmentNotFound;
 import hkmu.comps380f.exception.MaterialNotFound;
 import hkmu.comps380f.model.Attachment;
+import hkmu.comps380f.model.Course;
 import hkmu.comps380f.model.Material;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,6 +24,9 @@ public class MaterialService {
 
     @Resource
     private AttachmentRepository attachmentRepo;
+
+    @Resource
+    private CourseRepository courseRepository;
 
     @Transactional
     public List<Material> getMaterials() {
@@ -74,6 +79,9 @@ public class MaterialService {
             }
         }
         Material savedMaterial = materialRepo.save(material);
+        Course updateCourse = courseRepository.findById(courseId).orElse(null);
+        material.setCourse(updateCourse);
+        updateCourse.getMaterials().add(material);
         return savedMaterial.getId();
     }
 

@@ -14,13 +14,29 @@ public class Material implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    private long courseId;
+
     private String materialname;
+
     private String materialbody;
+
     @OneToMany(mappedBy = "material", fetch = FetchType.EAGER,
             cascade = CascadeType.ALL, orphanRemoval = true)
     @Fetch(FetchMode.SUBSELECT)
     private List<Attachment> attachments = new ArrayList<>();
+
+    private long courseId;
+
+    @ManyToOne
+    @JoinColumn(name = "courseid", insertable = false, updatable = false)
+    private Course course;
+
+    public Course getCourse() {
+        return course;
+    }
+
+    public void setCourse(Course course) {
+        this.course = course;
+    }
 
     public long getId() {
         return id;
