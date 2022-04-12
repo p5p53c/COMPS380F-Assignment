@@ -1,11 +1,9 @@
 package hkmu.comps380f.controller;
 
-//import hkmu.comps380f.exception.AttachmentNotFound;
-//import hkmu.comps380f.model.Attachment;
-//import hkmu.comps380f.service.AttachmentService;
-
 import hkmu.comps380f.model.Course;
+import hkmu.comps380f.service.AttachmentService;
 import hkmu.comps380f.service.CourseService;
+import hkmu.comps380f.service.MaterialService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -27,6 +25,12 @@ public class CourseController {
     @Autowired
     private CourseService courseService;
 
+    @Autowired
+    private MaterialService materialService;
+
+    @Autowired
+    private AttachmentService attachmentService;
+
     // Controller methods, Form object, ...
     @GetMapping({"", "/list"})
     public String list(ModelMap model) {
@@ -34,23 +38,49 @@ public class CourseController {
         return "list";
     }
 
+    @GetMapping("/view/{courseId}")
+    public String view(@PathVariable("courseId") long courseId, ModelMap model) {
+        Course course = courseService.getCourse(courseId);
+        if (course == null) {
+            return "redirect:/course/list";
+        }
+        model.addAttribute("course", course);
+        return "view";
+    }
+
     @GetMapping("/create")
     public ModelAndView create() {
-        return new ModelAndView("add", "courseForm", new Form());
+        return new ModelAndView("add", "materialForm", new Form());
     }
 
     public static class Form {
-
-        private String subject;
+        private Long courseid;
+        private String materialname;
+        private String materialbody;
         private List<MultipartFile> attachments;
 
-        // Getters and Setters of subject, body, attachments
-        public String getSubject() {
-            return subject;
+        public Long getCourseid() {
+            return courseid;
         }
 
-        public void setSubject(String subject) {
-            this.subject = subject;
+        public void setCourseid(Long courseid) {
+            this.courseid = courseid;
+        }
+
+        public String getMaterialname() {
+            return materialname;
+        }
+
+        public void setMaterialname(String materialname) {
+            this.materialname = materialname;
+        }
+
+        public String getMaterialbody() {
+            return materialbody;
+        }
+
+        public void setMaterialbody(String materialbody) {
+            this.materialbody = materialbody;
         }
 
         public List<MultipartFile> getAttachments() {
@@ -64,18 +94,9 @@ public class CourseController {
 
     @PostMapping("/create")
     public String create(Form form, Principal principal) throws IOException {
-        long courseId = courseService.createCourse(form.getSubject());
-        return "redirect:/ticket/view/" + courseId;
-    }
-
-    @GetMapping("/view/{courseId}")
-    public String view(@PathVariable("courseId") long courseId, ModelMap model) {
-        Course course = courseService.getCourse(courseId);
-        if (course == null) {
-            return "redirect:/course/list";
-        }
-        model.addAttribute("course", course);
-        return "view";
+        long materialId = materialService.createMaterial(form.getCourseid(),
+                form.getMaterialname(), form.getMaterialbody(), form.getAttachments());
+        return "redirect:/material/view/" + materialId;
     }
 
 }
