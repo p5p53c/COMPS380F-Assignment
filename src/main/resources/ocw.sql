@@ -84,6 +84,7 @@ INSERT INTO users(username, password) VALUES ('keith', '{noop}keithpw');
 INSERT INTO user_roles(username, role) VALUES ('keith', 'ROLE_ADMIN');
 
 INSERT INTO course(coursetitle) VALUES ('JSP');
-INSERT INTO material(courseid, materialname, materialbody) VALUES (1, 'Test 1', 'Test 1');
+INSERT INTO lecture(lecturetitle, courseid) VALUES ('Overview', 1);
+INSERT INTO material(lectureid, materialname, materialbody) VALUES (1, 'Test 1', 'Test 1');
 
 INSERT INTO comments(courseid, username, commentbody) VALUES (1, 'peter', 'Test 1');
