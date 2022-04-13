@@ -17,7 +17,7 @@
 <br /><br />
 <c:choose>
     <c:when test="${fn:length(lecture.materials) == 0}">
-        <i>There are no lecture in the system.</i>
+        <i>There are no lecture in the system.</i><br /><br />
     </c:when>
     <c:otherwise>
         <c:forEach items="${lecture.materials}" var="material" varStatus="status">

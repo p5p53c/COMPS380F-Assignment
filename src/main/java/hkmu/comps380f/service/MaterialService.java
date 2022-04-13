@@ -41,12 +41,13 @@ public class MaterialService {
     }
 
     @Transactional(rollbackFor = MaterialNotFound.class)
-    public void delete(long id) throws MaterialNotFound {
+    public long delete(long id) throws MaterialNotFound{
         Material deletedMaterial = materialRepo.findById(id).orElse(null);
         if (deletedMaterial == null) {
             throw new MaterialNotFound();
         }
         materialRepo.delete(deletedMaterial);
+        return deletedMaterial.getLectureid();
     }
 
     @Transactional(rollbackFor = AttachmentNotFound.class)

@@ -150,8 +150,8 @@ public class MaterialController {
     @GetMapping("/delete/{materialId}")
     public String deleteMaterial(@PathVariable("materialId") long materialId)
         throws MaterialNotFound {
-        materialService.delete(materialId);
-        return "redirect:/course/list";
+        long lectureId = materialService.delete(materialId);
+        return "redirect:/lecture/view/" + lectureId;
     }
 
 }

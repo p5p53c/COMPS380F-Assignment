@@ -31,8 +31,8 @@
     </c:if>
     <b>Add attachments</b><br />
     <input type="file" name="attachments" multiple="multiple"/><br/><br/>
-    <input type="submit" value="Save"/><br/><br/>
+    <input type="submit" value="Save"/> <input type=button value="Back" onCLick="history.back()">
 </form:form>
-<input type=button value="Back" onCLick="history.back()">
+
 </body>
 </html> 
