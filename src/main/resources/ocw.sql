@@ -21,13 +21,21 @@ CREATE TABLE course (
     PRIMARY KEY(id)
 );
 
+CREATE TABLE lecture (
+    id INTEGER NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
+    lecturetitle VARCHAR(50) NOT NULL,
+    courseid INTEGER,
+    PRIMARY KEY (id),
+    FOREIGN KEY (courseid) REFERENCES course(id)
+);
+
 CREATE TABLE material (
     id INTEGER NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
-    courseid INTEGER NOT NULL,
+    lectureid INTEGER NOT NULL,
     materialname VARCHAR(50) NOT NULL,
     materialbody VARCHAR(50) NOT NULL,
     PRIMARY KEY(id),
-    FOREIGN KEY(courseid) REFERENCES course(id)
+    FOREIGN KEY(lectureid) REFERENCES lecture(id)
 );
 
 CREATE TABLE attachment (

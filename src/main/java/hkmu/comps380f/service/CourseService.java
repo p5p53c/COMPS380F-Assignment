@@ -28,22 +28,5 @@ public class CourseService {
     public Course getCourse(long id) {
         return courseRepo.findById(id).orElse(null);
     }
-
-    @Transactional
-    public long createCourse(String title) {
-        Course course = new Course();
-        course.setCourseTitle(title);
-
-        Course savedCourse = courseRepo.save(course);
-        return savedCourse.getId();
-    }
-
-    @Transactional(rollbackFor = CourseNotFound.class)
-    public void delete(long id) throws CourseNotFound {
-        Course deletedTicket = courseRepo.findById(id).orElse(null);
-        if (deletedTicket == null) {
-            throw new CourseNotFound();
-        }
-        courseRepo.delete(deletedTicket);
-    }
+    
 }

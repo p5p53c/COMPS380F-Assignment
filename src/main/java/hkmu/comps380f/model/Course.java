@@ -23,6 +23,11 @@ public class Course implements Serializable {
 
     private String courseTitle;
 
+    @OneToMany(mappedBy = "course", fetch = FetchType.EAGER,
+    cascade = CascadeType.ALL, orphanRemoval = true)
+    @Fetch(FetchMode.SUBSELECT)
+    private List<Material> materials = new ArrayList<>();
+
     // getters and setters of all properties
     public long getId() {
         return id;
@@ -38,5 +43,13 @@ public class Course implements Serializable {
 
     public void setCourseTitle(String courseTitle) {
         this.courseTitle = courseTitle;
+    }
+
+    public List<Material> getMaterials() {
+        return materials;
+    }
+
+    public void setMaterials(List<Material> materials) {
+        this.materials = materials;
     }
 }
