@@ -21,6 +21,7 @@
         <input type="file" name="attachments" multiple="multiple" /><br /><br />
         <input type="hidden" name="courseid" value="${param.courseid}" />
         <input type="submit" value="Submit"/>
+        <input type=button value="Back" onCLick="history.back()">
     </form:form>
 </body>
 </html>

@@ -24,11 +24,15 @@
             Material ${material.id}:
             <a href="<c:url value="/material/view/${material.id}" />">
                 <c:out value="${material.materialname}" /></a>
+            <security:authorize access="hasRole('ADMIN')">
+                [<a href="<c:url value="/material/edit/${material.id}" />">Edit</a>]
+                [<a href="<c:url value="/material/delete/${material.id}" />">Delete</a>]
+            </security:authorize>
             <br /><br />
         </c:forEach>
     </c:otherwise>
 </c:choose>
 
-<a href="<c:url value="/course" />">Return to list tickets</a>
+<input type=button value="Back" onCLick="history.back()">
 </body>
 </html>

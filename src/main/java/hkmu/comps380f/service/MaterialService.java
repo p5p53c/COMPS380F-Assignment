@@ -43,8 +43,9 @@ public class MaterialService {
     @Transactional(rollbackFor = MaterialNotFound.class)
     public void delete(long id) throws MaterialNotFound {
         Material deletedMaterial = materialRepo.findById(id).orElse(null);
-        if (deletedMaterial == null)
+        if (deletedMaterial == null) {
             throw new MaterialNotFound();
+        }
         materialRepo.delete(deletedMaterial);
     }
 

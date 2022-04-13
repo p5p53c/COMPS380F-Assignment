@@ -26,6 +26,6 @@
     </c:otherwise>
 </c:choose>
 
-<a href="<c:url value="/course" />">Return to list tickets</a>
+<input type=button value="Back" onCLick="history.back()">
 </body>
 </html>

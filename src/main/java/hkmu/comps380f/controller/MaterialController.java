@@ -94,6 +94,7 @@ public class MaterialController {
         return "materialView";
     }
 
+    //download attachment
     @GetMapping("/{materialId}/attachment/{attachment:.+}")
     public View download(@PathVariable("materialId") long materialId,
                          @PathVariable("attachment") String name) {
@@ -105,6 +106,7 @@ public class MaterialController {
         return new RedirectView("/course/list", true);
     }
 
+    //delete attachment
     @GetMapping("{materialId}/delete/{attachment:.+}")
     public String deleteAttachment(@PathVariable("materialId") long materialId,
                                    @PathVariable("attachment") String name) throws AttachmentNotFound {
@@ -112,12 +114,13 @@ public class MaterialController {
         return "redirect:/material/edit/" + materialId;
     }
 
+    //edit material
     @GetMapping("/edit/{materialId}")
     public ModelAndView showEdit(@PathVariable("materialId") long materialId,
                                  Principal principal, HttpServletRequest request) {
         Material material = materialService.getMaterial(materialId);
         if (material == null || !request.isUserInRole("ROLE_ADMIN"))
-            return  new ModelAndView(new RedirectView("/ticked/list", true));
+            return  new ModelAndView(new RedirectView("/course/list", true));
 
         ModelAndView modelAndView = new ModelAndView("edit");
         modelAndView.addObject("material", material);
@@ -131,7 +134,7 @@ public class MaterialController {
     }
 
     @PostMapping("/edit/{materialId}")
-    public String edit(@PathVariable("materialid") long materialId, Form form,
+    public String edit(@PathVariable("materialId") long materialId, Form form,
                        Principal principal, HttpServletRequest request)
         throws IOException, MaterialNotFound {
         Material material = materialService.getMaterial(materialId);
@@ -143,6 +146,7 @@ public class MaterialController {
         return "redirect:/material/view/" + materialId;
     }
 
+    //delete material
     @GetMapping("/delete/{materialId}")
     public String deleteMaterial(@PathVariable("materialId") long materialId)
         throws MaterialNotFound {

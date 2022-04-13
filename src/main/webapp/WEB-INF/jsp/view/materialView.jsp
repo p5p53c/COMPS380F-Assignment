@@ -12,8 +12,8 @@
 
 <h2>Material #${material.id}: <c:out value="${material.materialname}" /></h2>
 <security:authorize access="hasRole('ADMIN')">
-    [<a href="<c:url value="/ticket/edit/${ticket.id}" />">Edit</a>]
-    [<a href="<c:url value="/ticket/delete/${ticket.id}" />">Delete</a>]
+    [<a href="<c:url value="/material/edit/${material.id}" />">Edit</a>]
+    [<a href="<c:url value="/material/delete/${material.id}" />">Delete</a>]
 </security:authorize>
 <br /><br />
 <c:out value="${material.materialbody}" /><br /><br />
@@ -25,6 +25,6 @@
             <c:out value="${attachment.name}" /></a>
     </c:forEach><br /><br />
 </c:if>
-<a href="<c:url value="/course/list" />">Return to list tickets</a>
+<input type=button value="Back" onCLick="history.back()">
 </body>
 </html>
