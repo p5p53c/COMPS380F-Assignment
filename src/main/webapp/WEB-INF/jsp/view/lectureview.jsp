@@ -10,17 +10,20 @@
     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 </form>
 
-<h2>Course ${course.id}: <c:out value="${course.courseTitle}" /></h2>
+<h2>Lecture ${lecture.id}: <c:out value="${lecture.lecturetitle}" /></h2>
+<security:authorize access="hasRole('ADMIN')">
+    <a href="<c:url value="/material/${lecture.id}/create" />">Create a Material</a><br /><br />
+</security:authorize>
 <br /><br />
 <c:choose>
-    <c:when test="${fn:length(course.lecture) == 0}">
+    <c:when test="${fn:length(lecture.materials) == 0}">
         <i>There are no lecture in the system.</i>
     </c:when>
     <c:otherwise>
-        <c:forEach items="${course.lecture}" var="lecture" varStatus="status">
-            Lecture ${lecture.lecturenumber}:
-            <a href="<c:url value="/lecture/view/${lecture.id}" />">
-                <c:out value="${lecture.lecturetitle}" /></a>
+        <c:forEach items="${lecture.materials}" var="material" varStatus="status">
+            Material ${material.id}:
+            <a href="<c:url value="/material/view/${material.id}" />">
+                <c:out value="${material.materialname}" /></a>
             <br /><br />
         </c:forEach>
     </c:otherwise>

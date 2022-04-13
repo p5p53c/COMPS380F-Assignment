@@ -2,11 +2,13 @@ package hkmu.comps380f.service;
 
 import hkmu.comps380f.dao.AttachmentRepository;
 import hkmu.comps380f.dao.CourseRepository;
+import hkmu.comps380f.dao.LectureRepository;
 import hkmu.comps380f.dao.MaterialRepository;
 import hkmu.comps380f.exception.AttachmentNotFound;
 import hkmu.comps380f.exception.MaterialNotFound;
 import hkmu.comps380f.model.Attachment;
 import hkmu.comps380f.model.Course;
+import hkmu.comps380f.model.Lecture;
 import hkmu.comps380f.model.Material;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -26,7 +28,7 @@ public class MaterialService {
     private AttachmentRepository attachmentRepo;
 
     @Resource
-    private CourseRepository courseRepository;
+    private LectureRepository lectureRepository;
 
     @Transactional
     public List<Material> getMaterials() {
@@ -60,12 +62,15 @@ public class MaterialService {
     }
 
     @Transactional
-    public long createMaterial(long courseId, String name, String body, List<MultipartFile> attachments) throws IOException {
+    public long createMaterial(long lectureId, String name, String body, List<MultipartFile> attachments) throws IOException {
+
+        //write material info to material bean
         Material material = new Material();
-        material.setCourseId(courseId);
+        material.setLectureid(lectureId);
         material.setMaterialname(name);
         material.setMaterialbody(body);
 
+        //add attachment to material
         for (MultipartFile filePart : attachments) {
             Attachment attachment = new Attachment();
             attachment.setName(filePart.getOriginalFilename());
@@ -79,9 +84,12 @@ public class MaterialService {
             }
         }
         Material savedMaterial = materialRepo.save(material);
-        Course updateCourse = courseRepository.findById(courseId).orElse(null);
-        material.setCourse(updateCourse);
-        updateCourse.getMaterials().add(material);
+
+        //add material to lecture
+        Lecture updateLecture = lectureRepository.findById(lectureId).orElse(null);
+        material.setLecture(updateLecture);
+        updateLecture.getMaterials().add(material);
+
         return savedMaterial.getId();
     }
 

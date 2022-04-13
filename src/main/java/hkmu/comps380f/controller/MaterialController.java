@@ -35,9 +35,18 @@ public class MaterialController {
     private AttachmentService attachmentService;
 
     public static class Form {
+        private Long lectureId;
         private String materialname;
         private String materialbody;
         private List<MultipartFile> attachments;
+
+        public Long getLectureId() {
+            return lectureId;
+        }
+
+        public void setLectureId(Long lectureId) {
+            this.lectureId = lectureId;
+        }
 
         public String getMaterialname() {
             return materialname;
@@ -64,13 +73,25 @@ public class MaterialController {
         }
     }
 
+    @GetMapping("/{lectureId}/create")
+    public ModelAndView create() {
+        return new ModelAndView("add", "materialForm", new Form());
+    }
+
+    @PostMapping("/{lectureId}/create")
+    public String create(Form form) throws IOException {
+        long materialId = materialService.createMaterial(form.getLectureId(),
+                form.getMaterialname(), form.getMaterialbody(), form.getAttachments());
+        return "redirect:/material/view/" + materialId;
+    }
+
     @GetMapping("/view/{materialId}")
     public String view(@PathVariable("materialId") long materialId, ModelMap model) {
         Material material = materialService.getMaterial(materialId);
         if (material == null)
             return "redirect:/course/list";
         model.addAttribute("material", material);
-        return "view";
+        return "materialView";
     }
 
     @GetMapping("/{materialId}/attachment/{attachment:.+}")
@@ -81,7 +102,7 @@ public class MaterialController {
             return new DownloadingView(attachment.getName(),
                     attachment.getMimeContentType(), attachment.getContents());
         }
-        return new RedirectView("/ticket/list", true);
+        return new RedirectView("/course/list", true);
     }
 
     @GetMapping("{materialId}/delete/{attachment:.+}")

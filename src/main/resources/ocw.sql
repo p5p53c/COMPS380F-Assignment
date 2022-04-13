@@ -23,6 +23,7 @@ CREATE TABLE course (
 
 CREATE TABLE lecture (
     id INTEGER NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
+    lecturenumber INTEGER NOT NULL,
     lecturetitle VARCHAR(50) NOT NULL,
     courseid INTEGER,
     PRIMARY KEY (id),
@@ -84,7 +85,7 @@ INSERT INTO users(username, password) VALUES ('keith', '{noop}keithpw');
 INSERT INTO user_roles(username, role) VALUES ('keith', 'ROLE_ADMIN');
 
 INSERT INTO course(coursetitle) VALUES ('JSP');
-INSERT INTO lecture(lecturetitle, courseid) VALUES ('Overview', 1);
+INSERT INTO lecture(lecturetitle, lecturenumber, courseid) VALUES ('Overview', 1, 1);
 INSERT INTO material(lectureid, materialname, materialbody) VALUES (1, 'Test 1', 'Test 1');
 
 INSERT INTO comments(courseid, username, commentbody) VALUES (1, 'peter', 'Test 1');

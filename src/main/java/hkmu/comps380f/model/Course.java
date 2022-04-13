@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -26,7 +25,7 @@ public class Course implements Serializable {
     @OneToMany(mappedBy = "course", fetch = FetchType.EAGER,
     cascade = CascadeType.ALL, orphanRemoval = true)
     @Fetch(FetchMode.SUBSELECT)
-    private List<Material> materials = new ArrayList<>();
+    private List<Lecture> lecture = new ArrayList<>();
 
     // getters and setters of all properties
     public long getId() {
@@ -45,11 +44,11 @@ public class Course implements Serializable {
         this.courseTitle = courseTitle;
     }
 
-    public List<Material> getMaterials() {
-        return materials;
+    public List<Lecture> getLecture() {
+        return lecture;
     }
 
-    public void setMaterials(List<Material> materials) {
-        this.materials = materials;
+    public void setLecture(List<Lecture> materials) {
+        this.lecture = materials;
     }
 }
