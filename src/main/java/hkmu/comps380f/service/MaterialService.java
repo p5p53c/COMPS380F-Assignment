@@ -2,13 +2,11 @@ package hkmu.comps380f.service;
 
 import hkmu.comps380f.dao.AttachmentRepository;
 import hkmu.comps380f.dao.CourseRepository;
-import hkmu.comps380f.dao.LectureRepository;
 import hkmu.comps380f.dao.MaterialRepository;
 import hkmu.comps380f.exception.AttachmentNotFound;
 import hkmu.comps380f.exception.MaterialNotFound;
 import hkmu.comps380f.model.Attachment;
 import hkmu.comps380f.model.Course;
-import hkmu.comps380f.model.Lecture;
 import hkmu.comps380f.model.Material;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -28,7 +26,7 @@ public class MaterialService {
     private AttachmentRepository attachmentRepo;
 
     @Resource
-    private LectureRepository lectureRepository;
+    private CourseRepository courseRepository;
 
     @Transactional
     public List<Material> getMaterials() {
@@ -41,23 +39,11 @@ public class MaterialService {
     }
 
     @Transactional(rollbackFor = MaterialNotFound.class)
-    public void delete(long lectureId, long materialId) throws MaterialNotFound{
-//        Material deletedMaterial = materialRepo.findById(lectureId).orElse(null);
-//        if (deletedMaterial == null) {
-//            throw new MaterialNotFound();
-//        }
-//        long returnvalue = deletedMaterial.getLectureid();
-//        materialRepo.delete(deletedMaterial);
-//        return returnvalue;
-        Lecture lecture = lectureRepository.findById(lectureId).orElse(null);
-        for (Material material: lecture.getMaterials()) {
-            if (material.getId() == materialId) {
-                lecture.deleteMaterial(material);
-                lectureRepository.save(lecture);
-                return;
-            }
-        }
-        throw new MaterialNotFound();
+    public void delete(long id) throws MaterialNotFound {
+        Material deletedMaterial = materialRepo.findById(id).orElse(null);
+        if (deletedMaterial == null)
+            throw new MaterialNotFound();
+        materialRepo.delete(deletedMaterial);
     }
 
     @Transactional(rollbackFor = AttachmentNotFound.class)
@@ -74,15 +60,12 @@ public class MaterialService {
     }
 
     @Transactional
-    public long createMaterial(long lectureId, String name, String body, List<MultipartFile> attachments) throws IOException {
-
-        //write material info to material bean
+    public long createMaterial(long courseId, String name, String body, List<MultipartFile> attachments) throws IOException {
         Material material = new Material();
-        material.setLectureid(lectureId);
+        material.setCourseId(courseId);
         material.setMaterialname(name);
         material.setMaterialbody(body);
 
-        //add attachment to material
         for (MultipartFile filePart : attachments) {
             Attachment attachment = new Attachment();
             attachment.setName(filePart.getOriginalFilename());
@@ -96,12 +79,9 @@ public class MaterialService {
             }
         }
         Material savedMaterial = materialRepo.save(material);
-
-        //add material to lecture
-        Lecture updateLecture = lectureRepository.findById(lectureId).orElse(null);
-        material.setLecture(updateLecture);
-        updateLecture.getMaterials().add(material);
-
+        Course updateCourse = courseRepository.findById(courseId).orElse(null);
+        material.setCourse(updateCourse);
+        updateCourse.getMaterials().add(material);
         return savedMaterial.getId();
     }
 
