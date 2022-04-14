@@ -1,4 +1,4 @@
 /target/
 .DS_Store
 src/.DS_Store
-.idea/libraries/Java_EE_6.xml
+/.idea/
