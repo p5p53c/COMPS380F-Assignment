@@ -1,17 +1,23 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <title>Customer Support</title>
-</head>
 <body>
-<c:url var="logoutUrl" value="/cslogout"/>
-<form action="${logoutUrl}" method="post">
-    <input type="submit" value="Log out" />
-    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-</form>
+<security:authorize access="hasAnyRole('USER', 'ADMIN')">
+    <c:url var="logoutUrl" value="/cslogout"/>
+    <form action="${logoutUrl}" method="post">
+        <input type="submit" value="Log out" />
+        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+    </form>
+</security:authorize>
+
+<security:authorize access="isAnonymous()">
+    <c:url var="loginUrl" value="/cslogin"/>
+    <form action="${loginUrl}" method="get">
+        <input type="submit" value="Log in" />
+    </form>
+</security:authorize>
 
 <h2>Course</h2>
-<security:authorize access="hasRole('ADMIN')">    
+<security:authorize access="hasRole('ADMIN')">
     <a href="<c:url value="/user" />">Manage User Accounts</a><br /><br />
 </security:authorize>
 <c:choose>
@@ -33,3 +39,6 @@
     <a href="<c:url value="/poll/create" />">Create a Poll</a>
 </security:authorize>
 </body>
+<head>
+    <title>Customer Support</title>
+</head>

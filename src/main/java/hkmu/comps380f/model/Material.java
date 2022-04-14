@@ -24,18 +24,26 @@ public class Material implements Serializable {
     @Fetch(FetchMode.SUBSELECT)
     private List<Attachment> attachments = new ArrayList<>();
 
-    private long courseId;
+    private long lectureid;
 
     @ManyToOne
-    @JoinColumn(name = "courseid", insertable = false, updatable = false)
-    private Course course;
+    @JoinColumn(name = "lectureid", insertable = false, updatable = false)
+    private Lecture lecture;
 
-    public Course getCourse() {
-        return course;
+    public long getLectureid() {
+        return lectureid;
     }
 
-    public void setCourse(Course course) {
-        this.course = course;
+    public void setLectureid(long lectureid) {
+        this.lectureid = lectureid;
+    }
+
+    public Lecture getLecture() {
+        return lecture;
+    }
+
+    public void setLecture(Lecture lecture) {
+        this.lecture = lecture;
     }
 
     public long getId() {
@@ -44,14 +52,6 @@ public class Material implements Serializable {
 
     public void setId(long id) {
         this.id = id;
-    }
-
-    public long getCourseId() {
-        return courseId;
-    }
-
-    public void setCourseId(long courseiId) {
-        this.courseId = courseiId;
     }
 
     public String getMaterialname() {
