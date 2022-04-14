@@ -106,7 +106,7 @@ public class CourseUserController {
     @PostMapping("/create")
     public View create(Form form) throws IOException {
         if (form.getRoles().length == 0) {
-            return new RedirectView("/user/create?error=role");
+            return new RedirectView("/user/create?error=role", true);
         }
         CourseUser user = new CourseUser(form.getUsername(),
                 form.getPassword(),
