@@ -41,13 +41,23 @@ public class MaterialService {
     }
 
     @Transactional(rollbackFor = MaterialNotFound.class)
-    public long delete(long id) throws MaterialNotFound{
-        Material deletedMaterial = materialRepo.findById(id).orElse(null);
-        if (deletedMaterial == null) {
-            throw new MaterialNotFound();
+    public void delete(long lectureId, long materialId) throws MaterialNotFound{
+//        Material deletedMaterial = materialRepo.findById(lectureId).orElse(null);
+//        if (deletedMaterial == null) {
+//            throw new MaterialNotFound();
+//        }
+//        long returnvalue = deletedMaterial.getLectureid();
+//        materialRepo.delete(deletedMaterial);
+//        return returnvalue;
+        Lecture lecture = lectureRepository.findById(lectureId).orElse(null);
+        for (Material material: lecture.getMaterials()) {
+            if (material.getId() == materialId) {
+                lecture.deleteMaterial(material);
+                lectureRepository.save(lecture);
+                return;
+            }
         }
-        materialRepo.delete(deletedMaterial);
-        return deletedMaterial.getLectureid();
+        throw new MaterialNotFound();
     }
 
     @Transactional(rollbackFor = AttachmentNotFound.class)

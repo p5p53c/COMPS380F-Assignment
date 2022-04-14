@@ -32,7 +32,7 @@ CREATE TABLE lecture (
 
 CREATE TABLE material (
     id INTEGER NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
-    lectureid INTEGER NOT NULL,
+    lectureid INTEGER DEFAULT NULL,
     materialname VARCHAR(50) NOT NULL,
     materialbody VARCHAR(50) NOT NULL,
     PRIMARY KEY(id),
@@ -91,7 +91,7 @@ INSERT INTO users(username, password) VALUES ('omegaalpha', '{noop}omegaalphapw'
 INSERT INTO user_roles(username, role) VALUES ('omegaalpha', 'ROLE_ADMIN');
 
 INSERT INTO course(coursetitle) VALUES ('JSP');
-INSERT INTO lecture(lecturenumber, lecturetitle, courseid) VALUES (2, 'Overview of Web Application', 1);
+INSERT INTO lecture(lecturenumber, lecturetitle, courseid) VALUES (1, 'Overview of Web Application', 1);
 INSERT INTO material(lectureid, materialname, materialbody) VALUES (1, 'Test 1', 'Test 1');
 
 INSERT INTO lecture(lecturenumber, lecturetitle, courseid) VALUES (2, 'Servlet', 1);

@@ -78,4 +78,9 @@ public class Lecture implements Serializable {
     public void setCourse(Course course) {
         this.course = course;
     }
+
+    public void deleteMaterial(Material material) {
+        material.setLecture(null);
+        this.materials.remove(material);
+    }
 }
