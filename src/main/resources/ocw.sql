@@ -84,8 +84,20 @@ INSERT INTO user_roles(username, role) VALUES ('peter', 'ROLE_USER');
 INSERT INTO users(username, password) VALUES ('keith', '{noop}keithpw');
 INSERT INTO user_roles(username, role) VALUES ('keith', 'ROLE_ADMIN');
 
+INSERT INTO users VALUES ('tatsunoko', '{noop}tatsunokopw', 'tatsunoko', 'address', 'phone');
+INSERT INTO user_roles(username, role) VALUES ('tatsunoko', 'ROLE_USER');
+
+INSERT INTO users(username, password) VALUES ('omegaalpha', '{noop}omegaalphapw');
+INSERT INTO user_roles(username, role) VALUES ('omegaalpha', 'ROLE_ADMIN');
+
 INSERT INTO course(coursetitle) VALUES ('JSP');
-INSERT INTO lecture(lecturetitle, lecturenumber, courseid) VALUES ('Overview', 1, 1);
+INSERT INTO lecture(lecturenumber, lecturetitle, courseid) VALUES (2, 'Overview of Web Application', 1);
 INSERT INTO material(lectureid, materialname, materialbody) VALUES (1, 'Test 1', 'Test 1');
+
+INSERT INTO lecture(lecturenumber, lecturetitle, courseid) VALUES (2, 'Servlet', 1);
+
+INSERT INTO course(coursetitle) VALUES ('Mobile App');
+INSERT INTO lecture(lecturenumber, lecturetitle, courseid) VALUES (1, 'Basics', 2);
+INSERT INTO lecture(lecturenumber, lecturetitle, courseid) VALUES (2, 'Android - Fundamentals', 2);
 
 INSERT INTO comments(courseid, username, commentbody) VALUES (1, 'peter', 'Test 1');
