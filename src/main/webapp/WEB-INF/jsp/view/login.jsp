@@ -10,6 +10,10 @@
         <c:if test="${param.logout != null}">
             <p>You have logged out.</p>
         </c:if>
+        <c:url var="registerUrl" value="/user/create" />
+        <form action="${registerUrl}" method="get">
+            <input type="submit" value="Sign up" />
+        </form>
         <h2>Online Course Login</h2>
         <form action="cslogin" method="POST">
             <label for="username">Username:</label><br/>
