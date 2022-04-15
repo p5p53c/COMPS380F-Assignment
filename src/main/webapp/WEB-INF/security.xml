@@ -28,6 +28,7 @@
     <http>
         <intercept-url pattern="/cslogin" access="permitAll()" />
         <intercept-url pattern="/course/list" access="permitAll()" />
+        <intercept-url pattern="/user/create" access="permitAll()" />
         <intercept-url pattern="/user/**" access="hasRole('ADMIN')" />
         <intercept-url pattern="/material/view/**" access="hasAnyRole('USER', 'ADMIN')"/>
         <intercept-url pattern="/material/**/attachment/**" access="hasAnyRole('USER','ADMIN')"/>

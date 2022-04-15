@@ -11,8 +11,12 @@
 
 <security:authorize access="isAnonymous()">
     <c:url var="loginUrl" value="/cslogin"/>
+    <c:url var="registerUrl" value="/user/create" />
     <form action="${loginUrl}" method="get">
         <input type="submit" value="Log in" />
+    </form>
+    <form action="${registerUrl}" method="get">
+        <input type="submit" value="Sign up" />
     </form>
 </security:authorize>
 
