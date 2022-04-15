@@ -74,7 +74,7 @@
                     <li>
                         <c:out value="${attachment.name}" />
                         [<a href="<c:url
-                            value=" /material/${material.id}/delete/${attachment.name}" />">Delete</a>]
+                            value="/material/${material.id}/delete/${attachment.name}" />">Delete</a>]
                     </li>
                 </c:forEach>
             </ul>
