@@ -25,6 +25,6 @@
             <c:out value="${attachment.name}" /></a>
     </c:forEach><br /><br />
 </c:if>
-<input type=button value="Back" onCLick="history.back()">
+<input type=button value="Back" onCLick="javascript:history.go(-1)">
 </body>
 </html>

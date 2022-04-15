@@ -77,7 +77,7 @@
 
         <input type="hidden" name="courseid" value="${param.courseid}" />
         <input type="submit" value="Submit" />
-        <input type=button value="Back" onCLick="history.back()">
+        <input type=button value="Back" onCLick="javascript:history.go(-1)">
     </form:form>
 
     <script>

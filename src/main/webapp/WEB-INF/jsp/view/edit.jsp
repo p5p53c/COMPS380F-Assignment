@@ -87,7 +87,7 @@
             <input type="file" name="attachments" class="drop-zone__input" multiple="multiple">
         </div>
 
-        <input type="submit" value="Save" /> <input type=button value="Back" onCLick="history.back()">
+        <input type="submit" value="Save" /> <input type=button value="Back" onCLick="javascript:history.go(-1)">
     </form:form>
 
     <script>
