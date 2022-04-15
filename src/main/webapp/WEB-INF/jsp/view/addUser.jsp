@@ -36,7 +36,7 @@
         <form:checkbox path="roles" value="ROLE_ADMIN"/>Lecturer
     </security:authorize>
     <br/><br/>
-    <input type="submit" value="Add User"/> <input type=button value="Back" onCLick="history.back()">
+    <input type="submit" value="Add User"/> <input type=button value="Back" onCLick="javascript:history.go(-1)">
 </form:form>
 </body>
 </html>

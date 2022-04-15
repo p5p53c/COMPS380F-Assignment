@@ -20,7 +20,7 @@
     <form:input path="address" type="text" /><br>
     <form:label path="phone">Phone</form:label><br>
     <form:input type="text" path="phone" /><br><br>
-    <input type="submit" value="Edit User"/> <input type=button value="Back" onCLick="history.back()">
+    <input type="submit" value="Edit User"/> <input type=button value="Back" onCLick="javascript:history.go(-1)">
 </form:form>
 </body>
 </html>

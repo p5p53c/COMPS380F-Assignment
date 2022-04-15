@@ -70,16 +70,14 @@
         <b>Attachments</b><br />
         <!-- <input type="file" name="attachments" multiple="multiple" /><br /><br /> -->
 
-
         <div class="drop-zone">
             <span class="drop-zone__prompt">Drop file here or click to upload</span>
             <input type="file" name="attachments" class="drop-zone__input" multiple="multiple">
         </div>
 
-
         <input type="hidden" name="courseid" value="${param.courseid}" />
         <input type="submit" value="Submit" />
-        <input type=button value="Back" onCLick="history.back()">
+        <input type=button value="Back" onCLick="javascript:history.go(-1)">
     </form:form>
 
     <script>

@@ -37,5 +37,5 @@
     </table>
     </c:otherwise>
 </c:choose>
-<input type=button value="Back" onCLick="history.back()">
+<input type=button value="Back" onCLick="javascript:history.go(-1)">
 </body>
