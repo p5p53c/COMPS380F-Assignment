@@ -5,6 +5,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "votes")
+@IdClass(VoteId.class)
 public class Vote implements Serializable {
 
     @Id

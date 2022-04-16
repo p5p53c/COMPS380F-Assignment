@@ -1,4 +1,3 @@
-/*
 package hkmu.comps380f.service;
 
 import hkmu.comps380f.dao.PollRepository;
@@ -19,11 +18,11 @@ public class VoteService {
 
     @Resource
     private VoteRepository voteRepo;
-
     //get all votes of a specified poll
-    @Transactional
     //public List<Vote> getVotes(long pollid) {
+    @Transactional
     public List<Vote> getVotes() {
+        //public List<Vote> getVotes(long pollid) {
         return voteRepo.findAll();
         //return voteRepo.findByPollid(pollid);
     }
@@ -33,7 +32,6 @@ public class VoteService {
     public Vote getVote(long pollid, String username) {
         return voteRepo.findByPollidAndUsername(pollid, username);
     }
-
     @Transactional
     public long create(long pollId, String username,
             String voteTarget) {
@@ -56,4 +54,3 @@ public class VoteService {
         voteRepo.save(updatedVote);
     }
 }
-*/
