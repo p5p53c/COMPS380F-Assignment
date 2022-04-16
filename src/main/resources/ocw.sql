@@ -24,14 +24,22 @@ CREATE TABLE course
     PRIMARY KEY (id)
 );
 
-CREATE TABLE material
-(
-    id           INTEGER     NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
-    courseid     INTEGER     NOT NULL,
+CREATE TABLE lecture (
+    id INTEGER NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
+    lecturenumber INTEGER NOT NULL,
+    lecturetitle VARCHAR(50) NOT NULL,
+    courseid INTEGER,
+    PRIMARY KEY (id),
+    FOREIGN KEY (courseid) REFERENCES course(id)
+);
+
+CREATE TABLE material (
+    id INTEGER NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
+    lectureid INTEGER DEFAULT NULL,
     materialname VARCHAR(50) NOT NULL,
     materialbody VARCHAR(50) NOT NULL,
-    PRIMARY KEY (id),
-    FOREIGN KEY (courseid) REFERENCES course (id)
+    PRIMARY KEY(id),
+    FOREIGN KEY(lectureid) REFERENCES lecture(id)
 );
 
 CREATE TABLE attachment
@@ -77,20 +85,27 @@ CREATE TABLE votes
     FOREIGN KEY (username) REFERENCES users(username)
 );
 
-INSERT INTO users
-VALUES ('peter', '{noop}peterpw', 'peter', 'address', 'phone');
-INSERT INTO user_roles(username, role)
-VALUES ('peter', 'ROLE_USER');
+INSERT INTO users VALUES ('peter', '{noop}peterpw', 'peter', 'address', 'phone');
+INSERT INTO user_roles(username, role) VALUES ('peter', 'ROLE_USER');
 
-INSERT INTO users(username, password)
-VALUES ('keith', '{noop}keithpw');
-INSERT INTO user_roles(username, role)
-VALUES ('keith', 'ROLE_ADMIN');
+INSERT INTO users(username, password) VALUES ('keith', '{noop}keithpw');
+INSERT INTO user_roles(username, role) VALUES ('keith', 'ROLE_ADMIN');
 
-INSERT INTO course(coursetitle)
-VALUES ('JSP');
-INSERT INTO material(courseid, materialname, materialbody)
-VALUES (1, 'Test 1', 'Test 1');
+INSERT INTO users VALUES ('tatsunoko', '{noop}tatsunokopw', 'tatsunoko', 'address', 'phone');
+INSERT INTO user_roles(username, role) VALUES ('tatsunoko', 'ROLE_USER');
+
+INSERT INTO users(username, password) VALUES ('omegaalpha', '{noop}omegaalphapw');
+INSERT INTO user_roles(username, role) VALUES ('omegaalpha', 'ROLE_ADMIN');
+
+INSERT INTO course(coursetitle) VALUES ('JSP');
+INSERT INTO lecture(lecturenumber, lecturetitle, courseid) VALUES (1, 'Overview of Web Application', 1);
+INSERT INTO material(lectureid, materialname, materialbody) VALUES (1, 'Test 1', 'Test 1');
+
+INSERT INTO lecture(lecturenumber, lecturetitle, courseid) VALUES (2, 'Servlet', 1);
+
+INSERT INTO course(coursetitle) VALUES ('Mobile App');
+INSERT INTO lecture(lecturenumber, lecturetitle, courseid) VALUES (1, 'Basics', 2);
+INSERT INTO lecture(lecturenumber, lecturetitle, courseid) VALUES (2, 'Android - Fundamentals', 2);
 
 INSERT INTO comments(courseid, username, commentbody) VALUES (1, 'peter', 'Test 1');
 
