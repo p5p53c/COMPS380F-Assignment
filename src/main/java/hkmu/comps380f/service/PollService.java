@@ -25,12 +25,12 @@ public class PollService {
         return pollRepo.findById(id).orElse(null);
     }
 
-    //cannot create
+    //can create
     @Transactional
-    public long createPoll(long pollId, String question,
+    public long createPoll(String question,
             String pollMC1, String pollMC2, String pollMC3, String pollMC4) {
         Poll poll = new Poll();
-        poll.setId(pollId);
+        //poll.setId(pollId);
         poll.setPollQuestion(question);
         poll.setPollMC1(pollMC1);
         poll.setPollMC2(pollMC2);

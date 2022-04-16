@@ -12,7 +12,7 @@
 
         <h2>Poll ${poll.id}: <c:out value="${poll.pollQuestion}" /></h2>
         <security:authorize access="hasRole('ADMIN')">
-            [<a href="<c:url value="/poll/delete/${poll.id}" />">Delete</a>]<br /><br />
+            [<a href="<c:url value="/poll/delete/${poll.id}" />">Delete</a>]<br />
         </security:authorize>
         <form:form method="POST" modelAttribute="voteForm">
             <label for="mcList">Choose one:</label><br/>

@@ -5,7 +5,7 @@ import hkmu.comps380f.exception.PollNotFound;
 import hkmu.comps380f.model.Poll;
 import hkmu.comps380f.model.Vote;
 import hkmu.comps380f.service.PollService;
-//import hkmu.comps380f.service.VoteService;
+import hkmu.comps380f.service.VoteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -29,10 +29,11 @@ public class PollController {
     @Autowired
     private PollService pollService;
 
-    //@Autowired
-    //private VoteService voteService;
+    @Autowired
+    private VoteService voteService;
+
     // Controller methods, Form object, ...
-    @GetMapping("/{pollId}")
+    /*@GetMapping("/{pollId}")
     public String view(@PathVariable("pollId") long pollId, ModelMap model) {
         Poll poll = pollService.getPoll(pollId);
         if (poll == null) {
@@ -41,19 +42,19 @@ public class PollController {
         model.addAttribute("poll", poll);
         return "poll";
     }
-/*
+*/
     @GetMapping("/{pollId}")
     public ModelAndView view(@PathVariable("pollId") long pollId, ModelMap model) {
         Poll poll = pollService.getPoll(pollId);
-        List<Vote> vote = voteService.getVotes(pollId);
+        //List<Vote> vote = voteService.getVotes(pollId);
         if (poll == null) {
             return new ModelAndView("list");
         }
         model.addAttribute("poll", poll);
-        model.addAttribute("vote", vote);
+        //model.addAttribute("vote", vote);
         return new ModelAndView("poll", "voteForm", new voteForm());
     }
-    */
+    
      
 
     public static class voteForm {
@@ -69,7 +70,7 @@ public class PollController {
         private int voteMC3;
         private int voteMC4;
 
-        // Getters and Setters of subject, body, attachments
+
         public long getPollId() {
             return pollId;
         }
@@ -169,7 +170,7 @@ public class PollController {
 
     public static class Form {
 
-        private long pollId;
+        private long pollid;
         private String question;
         private String mc1;
         private String mc2;
@@ -177,12 +178,12 @@ public class PollController {
         private String mc4;
 
         // Getters and Setters of subject, body, attachments
-        public long getPollId() {
-            return pollId;
+        public long getPollid() {
+            return pollid;
         }
 
-        public void setPollId(long pollId) {
-            this.pollId = pollId;
+        public void setPollid(long pollid) {
+            this.pollid = pollid;
         }
 
         public String getQuestion() {
@@ -229,7 +230,7 @@ public class PollController {
 
     @PostMapping("/create")
     public String create(Form form, Principal principal) throws IOException {
-        long pollId = pollService.createPoll(form.getPollId(), form.getQuestion(),
+        long pollId = pollService.createPoll(form.getQuestion(),
                  form.getMc1(), form.getMc2(), form.getMc3(), form.getMc4());
         return "redirect:/poll/" + pollId;
     }
