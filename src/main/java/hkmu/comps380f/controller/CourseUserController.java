@@ -13,6 +13,7 @@ import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.view.RedirectView;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.security.Principal;
 
@@ -67,14 +68,10 @@ public class CourseUserController {
     }
 
     @PostMapping("/create")
-<<<<<<< HEAD
-    public View create(Form form) throws IOException {
-=======
     public View create(Form form, HttpServletRequest request) throws IOException {
         if (form.getRoles().length == 0) {
             form.setRoles(new String[]{"ROLE_USER"});
         }
->>>>>>> 7ddc8f24d1d65bf52f1297d63a3d526df2b58d8d
         CourseUser user = new CourseUser(form.getUsername(),
                 form.getPassword(), form.getRoles());
         courseUserRepo.save(user);

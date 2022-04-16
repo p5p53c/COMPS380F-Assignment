@@ -3,11 +3,8 @@ package hkmu.comps380f.controller;
 import hkmu.comps380f.dao.PollRepository;
 import hkmu.comps380f.exception.PollNotFound;
 import hkmu.comps380f.model.Poll;
-<<<<<<< Updated upstream
-=======
 import hkmu.comps380f.model.Vote;
 import hkmu.comps380f.service.VoteService;
->>>>>>> Stashed changes
 import hkmu.comps380f.service.PollService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,10 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.io.IOException;
 import java.security.Principal;
-<<<<<<< Updated upstream
-=======
 import java.util.List;
->>>>>>> Stashed changes
 
 @Controller
 @RequestMapping("/poll")
@@ -35,8 +29,6 @@ public class PollController {
     @Autowired
     private PollService pollService;
 
-<<<<<<< Updated upstream
-=======
     @Autowired
     private VoteService voteService;
 
@@ -162,7 +154,6 @@ public class PollController {
         }
 
     }
->>>>>>> Stashed changes
 
     @PostMapping("/{pollId}")
     public String viewPoll(@PathVariable("pollId") long pollId, ModelMap model) {
@@ -174,10 +165,6 @@ public class PollController {
         return "poll";
     }
 
-<<<<<<< Updated upstream
-
-=======
->>>>>>> Stashed changes
     @GetMapping("/create")
     public ModelAndView create() {
         return new ModelAndView("addPoll", "pollForm", new Form());
@@ -246,11 +233,7 @@ public class PollController {
     @PostMapping("/create")
     public String create(Form form, Principal principal) throws IOException {
         long pollId = pollService.createPoll(form.getPollId(), form.getQuestion(),
-<<<<<<< Updated upstream
                  form.getMc1(), form.getMc2(), form.getMc3(), form.getMc4());
-=======
-                form.getMc1(), form.getMc2(), form.getMc3(), form.getMc4());
->>>>>>> Stashed changes
         return "redirect:/poll/" + pollId;
     }
 
