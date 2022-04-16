@@ -27,7 +27,8 @@
                 <input type="radio" name="mcList" id="mc2"  value="${poll.pollMC2}">${poll.pollMC4}<br />
             </c:if>
             <br/>
-            <input type="hidden" name="pollId" value="${param.pollId}" />
+            <input type="hidden" name="pollId" value="${poll.id}" />
+            <input type="hidden" name="username" value="${user.username}" />
             <input type="submit" value="Submit"/>
         </form:form>
         <br/><a href="<c:url value="/course" />">Return to Course List</a>

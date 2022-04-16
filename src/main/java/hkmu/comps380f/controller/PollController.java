@@ -4,6 +4,7 @@ import hkmu.comps380f.dao.PollRepository;
 import hkmu.comps380f.exception.PollNotFound;
 import hkmu.comps380f.model.Poll;
 import hkmu.comps380f.model.Vote;
+import hkmu.comps380f.service.CourseUserService;
 import hkmu.comps380f.service.PollService;
 import hkmu.comps380f.service.VoteService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +33,9 @@ public class PollController {
     @Autowired
     private VoteService voteService;
 
+    @Autowired
+    private CourseUserService userService;
+
     // Controller methods, Form object, ...
     /*@GetMapping("/{pollId}")
     public String view(@PathVariable("pollId") long pollId, ModelMap model) {
@@ -42,7 +46,7 @@ public class PollController {
         model.addAttribute("poll", poll);
         return "poll";
     }
-*/
+     */
     @GetMapping("/{pollId}")
     public ModelAndView view(@PathVariable("pollId") long pollId, ModelMap model) {
         Poll poll = pollService.getPoll(pollId);
@@ -54,22 +58,15 @@ public class PollController {
         //model.addAttribute("vote", vote);
         return new ModelAndView("poll", "voteForm", new voteForm());
     }
-    
-     
 
     public static class voteForm {
 
         private long pollId;
-        private String question;
+        private String username;
         private String mc1;
         private String mc2;
         private String mc3;
         private String mc4;
-        private int voteMC1;
-        private int voteMC2;
-        private int voteMC3;
-        private int voteMC4;
-
 
         public long getPollId() {
             return pollId;
@@ -77,14 +74,6 @@ public class PollController {
 
         public void setPollId(long pollId) {
             this.pollId = pollId;
-        }
-
-        public String getQuestion() {
-            return question;
-        }
-
-        public void setQuestion(String question) {
-            this.question = question;
         }
 
         public String getMc1() {
@@ -117,38 +106,6 @@ public class PollController {
 
         public void setMc4(String mc4) {
             this.mc4 = mc4;
-        }
-
-        public int getVoteMC1() {
-            return voteMC1;
-        }
-
-        public void setVoteMC1(int voteMC1) {
-            this.voteMC1 = voteMC1;
-        }
-
-        public int getVoteMC2() {
-            return voteMC2;
-        }
-
-        public void setVoteMC2(int voteMC2) {
-            this.voteMC2 = voteMC2;
-        }
-
-        public int getVoteMC3() {
-            return voteMC3;
-        }
-
-        public void setVoteMC3(int voteMC3) {
-            this.voteMC3 = voteMC3;
-        }
-
-        public int getVoteMC4() {
-            return voteMC4;
-        }
-
-        public void setVoteMC4(int voteMC4) {
-            this.voteMC4 = voteMC4;
         }
 
     }
@@ -231,7 +188,7 @@ public class PollController {
     @PostMapping("/create")
     public String create(Form form, Principal principal) throws IOException {
         long pollId = pollService.createPoll(form.getQuestion(),
-                 form.getMc1(), form.getMc2(), form.getMc3(), form.getMc4());
+                form.getMc1(), form.getMc2(), form.getMc3(), form.getMc4());
         return "redirect:/poll/" + pollId;
     }
 
