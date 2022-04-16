@@ -1,4 +1,3 @@
-/*
 package hkmu.comps380f.service;
 
 import hkmu.comps380f.dao.PollRepository;
@@ -56,4 +55,3 @@ public class VoteService {
         voteRepo.save(updatedVote);
     }
 }
-*/
