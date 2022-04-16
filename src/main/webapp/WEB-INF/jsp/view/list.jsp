@@ -10,6 +10,7 @@
             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
         </form>
 
+<<<<<<< HEAD
         <h2>Course</h2>
         <security:authorize access="hasRole('ADMIN')">    
             <a href="<c:url value="/user" />">Manage User Accounts</a><br /><br />
@@ -27,6 +28,18 @@
                 </c:forEach>
             </c:otherwise>
         </c:choose>
+=======
+<security:authorize access="isAnonymous()">
+    <c:url var="loginUrl" value="/cslogin"/>
+    <c:url var="registerUrl" value="/user/create" />
+    <form action="${loginUrl}" method="get">
+        <input type="submit" value="Log in" />
+    </form>
+    <form action="${registerUrl}" method="get">
+        <input type="submit" value="Sign up" />
+    </form>
+</security:authorize>
+>>>>>>> 7ddc8f24d1d65bf52f1297d63a3d526df2b58d8d
 
 <<<<<<< Updated upstream
         <h2>Poll</h2>

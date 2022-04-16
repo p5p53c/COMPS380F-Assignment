@@ -26,6 +26,12 @@
     </b:bean>
 
     <http>
+<<<<<<< HEAD
+=======
+        <intercept-url pattern="/cslogin" access="permitAll()" />
+        <intercept-url pattern="/course/list" access="permitAll()" />
+        <intercept-url pattern="/user/create" access="permitAll()" />
+>>>>>>> 7ddc8f24d1d65bf52f1297d63a3d526df2b58d8d
         <intercept-url pattern="/user/**" access="hasRole('ADMIN')" />
         <intercept-url pattern="/course/delete/**" access="hasRole('ADMIN')"/>
         <intercept-url pattern="/course/**" access="hasAnyRole('USER','ADMIN')"/>

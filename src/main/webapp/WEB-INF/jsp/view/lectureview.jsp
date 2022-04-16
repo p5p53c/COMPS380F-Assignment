@@ -10,29 +10,29 @@
     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 </form>
 
-<h2>Course ${course.id}: <c:out value="${course.courseTitle}" /></h2>
+<h2>Lecture ${lecture.id}: <c:out value="${lecture.lecturetitle}" /></h2>
 <security:authorize access="hasRole('ADMIN')">
-    <a href="<c:url value="/course/create?courseid=${course.id}" />">Create a Material</a><br /><br />
+    <a href="<c:url value="/material/${lecture.id}/create" />">Create a Material</a><br /><br />
 </security:authorize>
 <br /><br />
 <c:choose>
-    <c:when test="${fn:length(course.materials) == 0}">
-        <i>There are no material in the system.</i>
+    <c:when test="${fn:length(lecture.materials) == 0}">
+        <i>There are no lecture in the system.</i><br /><br />
     </c:when>
     <c:otherwise>
-        <c:forEach items="${course.materials}" var="material" varStatus="status">
+        <c:forEach items="${lecture.materials}" var="material" varStatus="status">
             Material ${material.id}:
             <a href="<c:url value="/material/view/${material.id}" />">
                 <c:out value="${material.materialname}" /></a>
+            <security:authorize access="hasRole('ADMIN')">
+                [<a href="<c:url value="/material/edit/${material.id}" />">Edit</a>]
+                [<a href="<c:url value="/material/delete/${material.id}" />">Delete</a>]
+            </security:authorize>
             <br /><br />
         </c:forEach>
     </c:otherwise>
 </c:choose>
 
-<<<<<<< HEAD
-<a href="<c:url value="/course" />">Return to list tickets</a>
-=======
 <input type=button value="Back" onCLick="javascript:history.go(-1)">
->>>>>>> 7ddc8f24d1d65bf52f1297d63a3d526df2b58d8d
 </body>
 </html>
