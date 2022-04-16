@@ -71,10 +71,17 @@ CREATE TABLE votes
 (
     pollid   INTEGER     NOT NULL,
     username VARCHAR(50) NOT NULL,
+<<<<<<< Updated upstream
     vote     INTEGER     NOT NULL,
     PRIMARY KEY (pollid, username),
     FOREIGN KEY (pollid) REFERENCES polls (id),
     FOREIGN KEY (username) REFERENCES users (username)
+=======
+    votetarget VARCHAR(50) NOT NULL,
+    PRIMARY KEY(pollid, username),
+    FOREIGN KEY (pollid) REFERENCES polls(id),
+    FOREIGN KEY (username) REFERENCES users(username)
+>>>>>>> Stashed changes
 );
 
 INSERT INTO users
@@ -92,5 +99,14 @@ VALUES ('JSP');
 INSERT INTO material(courseid, materialname, materialbody)
 VALUES (1, 'Test 1', 'Test 1');
 
+<<<<<<< Updated upstream
 INSERT INTO comments(courseid, username, commentbody)
 VALUES (1, 'peter', 'Test 1');
+=======
+INSERT INTO comments(courseid, username, commentbody) VALUES (1, 'peter', 'Test 1');
+
+INSERT INTO polls(pollquestion, pollMC1) VALUES ('Take attendance', 'Checked');
+INSERT INTO polls(pollquestion, pollMC1, pollMC2) VALUES ('Choose the class you prefer to join', 'L01', 'L02');
+INSERT INTO polls(pollquestion, pollMC1, pollMC2, pollMC3) VALUES ('Which date do you prefer for the mid-term test?', '1/5', '2/5', '3/5');
+INSERT INTO polls(pollquestion, pollMC1, pollMC2, pollMC3, pollMC4) VALUES ('3 + 3 / 3 * 3 = ?', '2', '3', '6', '2/3');
+>>>>>>> Stashed changes

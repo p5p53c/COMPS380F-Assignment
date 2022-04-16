@@ -27,12 +27,15 @@ public class CourseController {
     private CourseService courseService;
 
     @Autowired
+<<<<<<< Updated upstream
     private MaterialService materialService;
 
     @Autowired
     private AttachmentService attachmentService;
 
     @Autowired
+=======
+>>>>>>> Stashed changes
     private PollService pollService;
 
     // Controller methods, Form object, ...

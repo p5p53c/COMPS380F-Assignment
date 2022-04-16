@@ -29,7 +29,11 @@ public class PollService {
     public long createPoll(long pollId, String question,
              String pollMC1, String pollMC2, String pollMC3, String pollMC4) {
         Poll poll = new Poll();
+<<<<<<< Updated upstream
         poll.setId(pollId);
+=======
+        poll.setId((int)pollId);
+>>>>>>> Stashed changes
         poll.setPollQuestion(question);
         poll.setPollMC1(pollMC1);
         poll.setPollMC2(pollMC2);
