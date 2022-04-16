@@ -1,4 +1,4 @@
-package hkmu.comps380f.dao;
+/*package hkmu.comps380f.dao;
 
 import hkmu.comps380f.model.Vote;
 import java.util.List;
@@ -14,3 +14,4 @@ public interface VoteRepository extends JpaRepository<Vote, Long> {
 
 
 }
+*/
