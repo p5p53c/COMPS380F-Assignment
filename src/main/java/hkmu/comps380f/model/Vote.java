@@ -13,7 +13,7 @@ public class Vote implements Serializable {
     private String username;
 
     @Column(name = "votetarget")
-    private long voteTarget;
+    private String voteTarget;
 
     public long getPollid() {
         return pollid;
@@ -31,11 +31,11 @@ public class Vote implements Serializable {
         this.username = username;
     }
 
-    public long getVoteTarget() {
+    public String getVoteTarget() {
         return voteTarget;
     }
 
-    public void setVoteTarget(long voteTarget) {
+    public void setVoteTarget(String voteTarget) {
         this.voteTarget = voteTarget;
     }
 

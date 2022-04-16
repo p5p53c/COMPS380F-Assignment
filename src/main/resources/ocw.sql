@@ -1,27 +1,24 @@
-CREATE TABLE users
-(
+CREATE TABLE users (
     username VARCHAR(50) NOT NULL,
     password VARCHAR(50) NOT NULL,
     fullname VARCHAR(50) DEFAULT NULL,
-    address  VARCHAR(50) DEFAULT NULL,
-    phone    VARCHAR(8)  DEFAULT NULL,
-    PRIMARY KEY (username)
+    address VARCHAR(50) DEFAULT NULL,
+    phone VARCHAR(8)   DEFAULT NULL,
+    PRIMARY KEY(username)
 );
 
-CREATE TABLE user_roles
-(
-    user_role_id INTEGER     NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
-    username     VARCHAR(50) NOT NULL,
-    role         VARCHAR(50) NOT NULL,
-    PRIMARY KEY (user_role_id),
-    FOREIGN KEY (username) REFERENCES users (username)
+CREATE TABLE user_roles (
+    user_role_id INTEGER NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
+    username VARCHAR(50) NOT NULL,
+    role VARCHAR(50)    NOT NULL,
+    PRIMARY KEY(user_role_id),
+    FOREIGN KEY(username) REFERENCES users(username)
 );
 
-CREATE TABLE course
-(
-    id          INTEGER     NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
+CREATE TABLE course (
+    id INTEGER NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
     coursetitle VARCHAR(50) NOT NULL,
-    PRIMARY KEY (id)
+    PRIMARY KEY(id)
 );
 
 CREATE TABLE lecture (
@@ -42,42 +39,38 @@ CREATE TABLE material (
     FOREIGN KEY(lectureid) REFERENCES lecture(id)
 );
 
-CREATE TABLE attachment
-(
-    id           INTEGER NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
-    materialid   INTEGER      DEFAULT NULL,
-    filename     VARCHAR(255) DEFAULT NULL,
+CREATE TABLE attachment (
+    id INTEGER NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
+    materialid INTEGER DEFAULT NULL,
+    filename VARCHAR(255) DEFAULT NULL,
     content_type VARCHAR(255) DEFAULT NULL,
-    content      BLOB         DEFAULT NULL,
+    content BLOB DEFAULT NULL,
     PRIMARY KEY (id),
-    FOREIGN KEY (materialid) REFERENCES material (id)
+    FOREIGN KEY (materialid) REFERENCES material(id)
 );
 
-CREATE TABLE comments
-(
-    id          INTEGER     NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
-    courseid    INTEGER     NOT NULL,
-    username    VARCHAR(50) NOT NULL,
+CREATE TABLE comments (
+    id INTEGER NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
+    courseid INTEGER NOT NULL,
+    username VARCHAR(50) NOT NULL,
     commentbody VARCHAR(50) NOT NULL,
     PRIMARY KEY (id),
-    FOREIGN KEY (courseid) REFERENCES course (id),
-    FOREIGN KEY (username) REFERENCES users (username)
+    FOREIGN KEY (courseid) REFERENCES course(id),
+    FOREIGN KEY (username) REFERENCES users(username)
 );
 
-CREATE TABLE polls
-(
-    id           INTEGER     NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
+CREATE TABLE polls (
+    id INTEGER NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
     pollquestion VARCHAR(50) NOT NULL,
-    pollMC1      VARCHAR(50) NOT NULL,
-    pollMC2      VARCHAR(50) DEFAULT NULL,
-    pollMC3      VARCHAR(50) DEFAULT NULL,
-    pollMC4      VARCHAR(50) DEFAULT NULL,
+    pollMC1 VARCHAR(50) NOT NULL,
+    pollMC2 VARCHAR(50) DEFAULT NULL,
+    pollMC3 VARCHAR(50) DEFAULT NULL,
+    pollMC4 VARCHAR(50) DEFAULT NULL,
     PRIMARY KEY (id)
 );
 
-CREATE TABLE votes
-(
-    pollid   INTEGER     NOT NULL,
+CREATE TABLE votes (
+    pollid INTEGER NOT NULL,
     username VARCHAR(50) NOT NULL,
     votetarget VARCHAR(50) NOT NULL,
     PRIMARY KEY(pollid, username),
@@ -113,3 +106,5 @@ INSERT INTO polls(pollquestion, pollMC1) VALUES ('Take attendance', 'Checked');
 INSERT INTO polls(pollquestion, pollMC1, pollMC2) VALUES ('Choose the class you prefer to join', 'L01', 'L02');
 INSERT INTO polls(pollquestion, pollMC1, pollMC2, pollMC3) VALUES ('Which date do you prefer for the mid-term test?', '1/5', '2/5', '3/5');
 INSERT INTO polls(pollquestion, pollMC1, pollMC2, pollMC3, pollMC4) VALUES ('3 + 3 / 3 * 3 = ?', '2', '3', '6', '2/3');
+
+INSERT INTO votes(pollid, username, votetarget) VALUES (1, 'keith', 'Checked');

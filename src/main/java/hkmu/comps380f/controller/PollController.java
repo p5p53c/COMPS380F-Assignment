@@ -4,8 +4,8 @@ import hkmu.comps380f.dao.PollRepository;
 import hkmu.comps380f.exception.PollNotFound;
 import hkmu.comps380f.model.Poll;
 import hkmu.comps380f.model.Vote;
-import hkmu.comps380f.service.VoteService;
 import hkmu.comps380f.service.PollService;
+//import hkmu.comps380f.service.VoteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -29,11 +29,8 @@ public class PollController {
     @Autowired
     private PollService pollService;
 
-    @Autowired
-    private VoteService voteService;
-
-    /*
->>>>>>> Stashed changes
+    //@Autowired
+    //private VoteService voteService;
     // Controller methods, Form object, ...
     @GetMapping("/{pollId}")
     public String view(@PathVariable("pollId") long pollId, ModelMap model) {
@@ -44,9 +41,7 @@ public class PollController {
         model.addAttribute("poll", poll);
         return "poll";
     }
-<<<<<<< Updated upstream
-=======
-     */
+/*
     @GetMapping("/{pollId}")
     public ModelAndView view(@PathVariable("pollId") long pollId, ModelMap model) {
         Poll poll = pollService.getPoll(pollId);
@@ -58,6 +53,8 @@ public class PollController {
         model.addAttribute("vote", vote);
         return new ModelAndView("poll", "voteForm", new voteForm());
     }
+    */
+     
 
     public static class voteForm {
 

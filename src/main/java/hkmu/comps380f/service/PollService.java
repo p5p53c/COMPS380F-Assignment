@@ -25,13 +25,12 @@ public class PollService {
         return pollRepo.findById(id).orElse(null);
     }
 
+    //cannot create
     @Transactional
     public long createPoll(long pollId, String question,
-             String pollMC1, String pollMC2, String pollMC3, String pollMC4) {
+            String pollMC1, String pollMC2, String pollMC3, String pollMC4) {
         Poll poll = new Poll();
         poll.setId(pollId);
-        //not sure you want which one
-        //poll.setId((int)pollId);
         poll.setPollQuestion(question);
         poll.setPollMC1(pollMC1);
         poll.setPollMC2(pollMC2);
@@ -42,6 +41,7 @@ public class PollService {
         return savedPoll.getId();
     }
 
+    //can delete
     @Transactional(rollbackFor = PollNotFound.class)
     public void delete(long id) throws PollNotFound {
         Poll deletedPoll = pollRepo.findById(id).orElse(null);
