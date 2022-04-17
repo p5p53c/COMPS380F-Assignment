@@ -49,6 +49,7 @@
                 </tr>
             </table>
         </form:form>
+            <!-- This area is for comments -->
         <br/><a href="<c:url value="/course" />">Return to Course List</a>
     </body>
 </html>
