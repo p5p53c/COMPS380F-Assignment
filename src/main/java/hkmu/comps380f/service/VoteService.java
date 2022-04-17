@@ -22,6 +22,7 @@ public class VoteService {
 
     @Resource
     private CourseUserRepository courseUserRepo;
+
     //get all votes of a specified poll
     //public List<Vote> getVotes(long pollid) {
     @Transactional
@@ -36,6 +37,7 @@ public class VoteService {
     public Vote getVote(long pollid, String username) {
         return voteRepo.findByPollidAndUsername(pollid, username);
     }
+
     @Transactional(rollbackFor = PollNotFound.class)
     public void create(long pollId, String username,
             String voteTarget) {
@@ -56,5 +58,17 @@ public class VoteService {
         }
         updatedVote.setVoteTarget(voteTarget);
         voteRepo.save(updatedVote);
+    }
+
+    @Transactional
+    public long getTotalVotes(long pollId) {
+        long total = voteRepo.countByPollid(pollId);
+        return total;
+    }
+
+    @Transactional
+    public long getTotalVote(long pollId, String voteTarget) {
+        long total = voteRepo.countByPollidAndVoteTarget(pollId, voteTarget);
+        return total;
     }
 }

@@ -51,12 +51,16 @@ public class PollController {
     @GetMapping("/{pollId}")
     public ModelAndView view(@PathVariable("pollId") long pollId, ModelMap model) {
         Poll poll = pollService.getPoll(pollId);
-        List<Vote> vote = voteService.getVotes();
+        //List<Vote> vote = voteService.getVotes();
         if (poll == null) {
             return new ModelAndView("list");
         }
         model.addAttribute("poll", poll);
-        model.addAttribute("vote", vote);
+        model.addAttribute("totalVote1", voteService.getTotalVote(pollId, poll.getPollMC1()));
+        model.addAttribute("totalVote2", voteService.getTotalVote(pollId, poll.getPollMC2()));
+        model.addAttribute("totalVote3", voteService.getTotalVote(pollId, poll.getPollMC3()));
+        model.addAttribute("totalVote4", voteService.getTotalVote(pollId, poll.getPollMC4()));
+        model.addAttribute("totalVotes", voteService.getTotalVotes(pollId));
         return new ModelAndView("poll", "voteForm", new VoteForm());
     }
 

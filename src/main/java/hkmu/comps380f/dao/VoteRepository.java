@@ -12,5 +12,7 @@ public interface VoteRepository extends JpaRepository<Vote, VoteId> {
     //@Query("select v from votes v where v.pollid = ?1 and v.username = ?2")
     Vote findByPollidAndUsername(long pollid, String username);
 
-    //Long countByPollidAndVotetarget(long pollid, int voteTarget);
+    long countByPollid(long pollid);
+
+    long countByPollidAndVoteTarget(long pollid, String voteTarget);
 }
