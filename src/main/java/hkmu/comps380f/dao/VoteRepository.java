@@ -9,6 +9,7 @@ import org.springframework.data.jpa.repository.Query;
 public interface VoteRepository extends JpaRepository<Vote, VoteId> {
 
     List<Vote> findByPollid(long pollid);
+
     //@Query("select v from votes v where v.pollid = ?1 and v.username = ?2")
     Vote findByPollidAndUsername(long pollid, String username);
 

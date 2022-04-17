@@ -71,4 +71,5 @@ public class VoteService {
         long total = voteRepo.countByPollidAndVoteTarget(pollId, voteTarget);
         return total;
     }
+
 }
