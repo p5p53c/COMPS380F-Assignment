@@ -15,21 +15,21 @@
             [<a href="<c:url value="/poll/delete/${poll.id}" />">Delete</a>]<br />
         </security:authorize>
         <form:form method="POST" modelAttribute="voteForm">
-            <label for="mcList">Choose one:</label><br/>
-            <input type="radio" name="mcList" id="mc1"  value="${poll.pollMC1}">${poll.pollMC1}<br />
+            <form:label path="voteTarget">Choose one:</form:label><br/>
+            <form:radiobutton path="voteTarget" value="${poll.pollMC1}" label="${poll.pollMC1}" /><br/>
             <c:if test="${!empty poll.pollMC2}">
-                <input type="radio" name="mcList" id="mc2"  value="${poll.pollMC2}">${poll.pollMC2}<br />
+                <form:radiobutton path="voteTarget" value="${poll.pollMC2}" label="${poll.pollMC2}" /><br/>
             </c:if>
             <c:if test="${!empty poll.pollMC3}">
-                <input type="radio" name="mcList" id="mc2"  value="${poll.pollMC2}">${poll.pollMC3}<br />
+                <form:radiobutton path="voteTarget" value="${poll.pollMC3}" label="${poll.pollMC3}" /><br/>
             </c:if>
             <c:if test="${!empty poll.pollMC4}">
-                <input type="radio" name="mcList" id="mc2"  value="${poll.pollMC2}">${poll.pollMC4}<br />
+                <form:radiobutton path="voteTarget" value="${poll.pollMC4}" label="${poll.pollMC4}" /><br/>
             </c:if>
-            <br/>
-            <input type="hidden" name="pollId" value="${poll.id}" />
-            <input type="hidden" name="username" value="${user.username}" />
-            <input type="submit" value="Submit"/>
+                <br/>
+                <form:hidden path="pollId" value="${poll.id}" /><br/>
+                <form:hidden path="username" value="${pageContext.request.remoteUser}" />
+                <input type="submit" value="Submit"/>
         </form:form>
         <br/><a href="<c:url value="/course" />">Return to Course List</a>
     </body>

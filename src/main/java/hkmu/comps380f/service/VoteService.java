@@ -1,5 +1,6 @@
 package hkmu.comps380f.service;
 
+import hkmu.comps380f.dao.CourseUserRepository;
 import hkmu.comps380f.dao.PollRepository;
 import hkmu.comps380f.dao.VoteRepository;
 import hkmu.comps380f.exception.PollNotFound;
@@ -18,6 +19,9 @@ public class VoteService {
 
     @Resource
     private VoteRepository voteRepo;
+
+    @Resource
+    private CourseUserRepository courseUserRepo;
     //get all votes of a specified poll
     //public List<Vote> getVotes(long pollid) {
     @Transactional
@@ -32,8 +36,8 @@ public class VoteService {
     public Vote getVote(long pollid, String username) {
         return voteRepo.findByPollidAndUsername(pollid, username);
     }
-    @Transactional
-    public long create(long pollId, String username,
+    @Transactional(rollbackFor = PollNotFound.class)
+    public void create(long pollId, String username,
             String voteTarget) {
         Vote vote = new Vote();
         vote.setPollid(pollId);
@@ -41,12 +45,12 @@ public class VoteService {
         vote.setVoteTarget(voteTarget);
 
         Vote savedVote = voteRepo.save(vote);
-        return savedVote.getPollid();
+        //return savedVote.getPollid();
     }
 
     @Transactional(rollbackFor = PollNotFound.class)
-    public void update(long id, String username, String voteTarget) throws PollNotFound {
-        Vote updatedVote = voteRepo.findByPollidAndUsername(id, username);
+    public void update(long pollId, String username, String voteTarget) throws PollNotFound {
+        Vote updatedVote = voteRepo.findByPollidAndUsername(pollId, username);
         if (updatedVote == null) {
             throw new PollNotFound();
         }

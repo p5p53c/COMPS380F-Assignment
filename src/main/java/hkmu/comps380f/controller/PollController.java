@@ -19,6 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 import java.io.IOException;
 import java.security.Principal;
 import java.util.List;
+import javax.servlet.http.HttpServletRequest;
 
 @Controller
 @RequestMapping("/poll")
@@ -50,23 +51,20 @@ public class PollController {
     @GetMapping("/{pollId}")
     public ModelAndView view(@PathVariable("pollId") long pollId, ModelMap model) {
         Poll poll = pollService.getPoll(pollId);
-        //List<Vote> vote = voteService.getVotes(pollId);
+        List<Vote> vote = voteService.getVotes();
         if (poll == null) {
             return new ModelAndView("list");
         }
         model.addAttribute("poll", poll);
-        //model.addAttribute("vote", vote);
-        return new ModelAndView("poll", "voteForm", new voteForm());
+        model.addAttribute("vote", vote);
+        return new ModelAndView("poll", "voteForm", new VoteForm());
     }
 
-    public static class voteForm {
+    public static class VoteForm {
 
         private long pollId;
         private String username;
-        private String mc1;
-        private String mc2;
-        private String mc3;
-        private String mc4;
+        private String voteTarget;
 
         public long getPollId() {
             return pollId;
@@ -76,48 +74,28 @@ public class PollController {
             this.pollId = pollId;
         }
 
-        public String getMc1() {
-            return mc1;
+        public String getUsername() {
+            return username;
         }
 
-        public void setMc1(String mc1) {
-            this.mc1 = mc1;
+        public void setUsername(String username) {
+            this.username = username;
         }
 
-        public String getMc2() {
-            return mc2;
+        public String getVoteTarget() {
+            return voteTarget;
         }
 
-        public void setMc2(String mc2) {
-            this.mc2 = mc2;
-        }
-
-        public String getMc3() {
-            return mc3;
-        }
-
-        public void setMc3(String mc3) {
-            this.mc3 = mc3;
-        }
-
-        public String getMc4() {
-            return mc4;
-        }
-
-        public void setMc4(String mc4) {
-            this.mc4 = mc4;
+        public void setVoteTarget(String voteTarget) {
+            this.voteTarget = voteTarget;
         }
 
     }
 
     @PostMapping("/{pollId}")
-    public String viewPoll(@PathVariable("pollId") long pollId, ModelMap model) {
-        Poll poll = pollService.getPoll(pollId);
-        if (poll == null) {
-            return "redirect:/course/list";
-        }
-        model.addAttribute("poll", poll);
-        return "poll";
+    public String viewPoll(@PathVariable("pollId") long pollId, VoteForm voteForm, ModelMap model) {
+        voteService.create(voteForm.getPollId(), voteForm.getUsername(), voteForm.getVoteTarget());
+        return "redirect:/poll/{pollId}";
     }
 
     @GetMapping("/create")
