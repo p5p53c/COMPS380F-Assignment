@@ -61,14 +61,17 @@
                 username: `${currentUser}`,
                 voteTarget: `${currentVote.voteTarget}`
             };
-            //var isLogined = (currentUser.username == null? false : true);
-            //console.log(isLogined);
+            var isLogined = (currentUser.username != ""? true : false);
+            console.log(currentUser.username);
+            console.log(isLogined);
             var mcLength = document.querySelectorAll("td input").length - 1;
             function openSubmit(radiobutton) {
-                if (radiobutton.checked == true) {
+                if (radiobutton.checked == true && isLogined) {
                     document.getElementById("sb").disabled = false;
                     document.getElementById("submitWarning").hidden = true;
                 }
+                else
+                    document.getElementById("submitWarning").innerHTML = "You must login before voting!";
             }
             function checkVoted() {
                 if (currentUser.voteTarget != null)
