@@ -51,14 +51,13 @@ public class PollController {
     @GetMapping("/{pollId}")
     public ModelAndView view(@PathVariable("pollId") long pollId, ModelMap model, HttpServletRequest request) {
         Poll poll = pollService.getPoll(pollId);
-        //List<Vote> vote = voteService.getVotes();
         if (poll == null) {
-            return new ModelAndView("list");
+            return new ModelAndView("redirect:/course/list");
         }
         model.addAttribute("poll", poll);
-        //String username = (String)request.getSessionAttribute(request,"user");
-        //model.addAttribute("User", username);
-        //model.addAttribute("currentUserd", voteService.getVote(pollId, username));
+        String username = request.getRemoteUser();
+        model.addAttribute("currentUser", username);
+        model.addAttribute("currentVote", voteService.getVote(pollId, username));
         model.addAttribute("totalVote1", voteService.getTotalVote(pollId, poll.getPollMC1()));
         model.addAttribute("totalVote2", voteService.getTotalVote(pollId, poll.getPollMC2()));
         model.addAttribute("totalVote3", voteService.getTotalVote(pollId, poll.getPollMC3()));
