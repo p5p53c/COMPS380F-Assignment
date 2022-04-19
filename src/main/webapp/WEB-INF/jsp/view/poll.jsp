@@ -85,15 +85,11 @@
             </table>
         </form:form>
         <span id="submitWarning" style="color:red" >You must choose one answer before submit!</span><br/>
-        currentUser: ${currentUser}<br/>
-        currentVote.username: ${currentVote.username}<br/>
-        currentVote.voteTarget: ${currentVote.voteTarget}<br/>
-        pageContext.request.remoteUser: ${pageContext.request.remoteUser}<br/>
-        
+
         <!-- 
             This area is for comments 
         -->
-        
+
         <br/><a href="<c:url value="/course" />">Return to Course List</a>
 
         <script>
@@ -101,16 +97,12 @@
                 username: `${currentUser}`,
                 voteTarget: `${currentVote.voteTarget}`
             };
-            var isLogined = (currentUser.username != "" ? true : false);
-            console.log(currentUser.username);
-            console.log(isLogined);
             var mcLength = document.querySelectorAll("td input").length - 1;
             function openSubmit(radiobutton) {
-                if (radiobutton.checked == true && isLogined) {
+                if (radiobutton.checked == true) {
                     document.getElementById("sb").disabled = false;
                     document.getElementById("submitWarning").hidden = true;
-                } else
-                    document.getElementById("submitWarning").innerHTML = "You must login before voting!";
+                }
             }
             function checkVoted() {
                 if (currentUser.voteTarget != null)
@@ -127,19 +119,19 @@
             for (var i = 1; i <= mcLength; i++) {
                 switch (i) {
                     case 1:
-                        var percent = (${totalVote1} /${totalVotes}) * 100;
+                        var percent = (${totalVote1} / ${totalVotes}) * 100;
                         document.documentElement.style.setProperty("--mc1Per", percent + "%");
                         break;
                     case 2:
-                        var percent = (${totalVote2} /${totalVotes}) * 100;
+                        var percent = (${totalVote2} / ${totalVotes}) * 100;
                         document.documentElement.style.setProperty("--mc2Per", percent + "%");
                         break;
                     case 3:
-                        var percent = (${totalVote3} /${totalVotes}) * 100;
+                        var percent = (${totalVote3} / ${totalVotes}) * 100;
                         document.documentElement.style.setProperty("--mc3Per", percent + "%");
                         break;
                     case 4:
-                        var percent = (${totalVote4} /${totalVotes}) * 100;
+                        var percent = (${totalVote4} / ${totalVotes}) * 100;
                         document.documentElement.style.setProperty("--mc4Per", percent + "%");
                         break;
                 }

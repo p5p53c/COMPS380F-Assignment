@@ -38,16 +38,6 @@ public class PollController {
     private CourseUserService userService;
 
     // Controller methods, Form object, ...
-    /*@GetMapping("/{pollId}")
-    public String view(@PathVariable("pollId") long pollId, ModelMap model) {
-        Poll poll = pollService.getPoll(pollId);
-        if (poll == null) {
-            return "redirect:/course/list";
-        }
-        model.addAttribute("poll", poll);
-        return "poll";
-    }
-     */
     @GetMapping("/{pollId}")
     public ModelAndView view(@PathVariable("pollId") long pollId, ModelMap model, HttpServletRequest request) {
         Poll poll = pollService.getPoll(pollId);
