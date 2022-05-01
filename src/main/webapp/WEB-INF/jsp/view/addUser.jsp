@@ -3,7 +3,7 @@
     <head>
         <title>Customer Support</title>
     </head>
-    <body>
+    <body onLoad="init()">
         <security:authorize access="hasAnyRole('USER', 'ADMIN')">
             <c:url var="logoutUrl" value="/cslogout"/>
             <form action="${logoutUrl}" method="post">

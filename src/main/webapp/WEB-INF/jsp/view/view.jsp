@@ -3,7 +3,7 @@
     <head>
         <title>Online Course Website</title>
     </head>
-    <body>
+    <body onLoad="init()">
         <c:url var="logoutUrl" value="/cslogout"/>
         <form action="${logoutUrl}" method="post">
             <input id="t_logout" type="submit" value="Log out" />

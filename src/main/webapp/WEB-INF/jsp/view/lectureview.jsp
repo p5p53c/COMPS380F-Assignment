@@ -3,7 +3,7 @@
     <head>
         <title>Online Course Website</title>
     </head>
-    <body>
+    <body onLoad="init()">
         <c:url var="logoutUrl" value="/cslogout"/>
         <form action="${logoutUrl}" method="post">
             <input id="t_logout" type="submit" value="Log out" />
@@ -19,7 +19,7 @@
         <br /><br />
         <c:choose>
             <c:when test="${fn:length(lecture.materials) == 0}">
-                <i>There are no lecture in the system.</i><br /><br />
+                <i id="t_nolecture">There are no lecture in the system.</i><br /><br />
             </c:when>
             <c:otherwise>
                 <c:forEach items="${lecture.materials}" var="material" varStatus="status">
@@ -53,6 +53,9 @@
                         document.getElementById("t_lecture").innerHTML = "Lecture";
                         if (document.getElementById("t_cmaterial"))
                             document.getElementById("t_cmaterial").innerHTML = "Create a Material";
+                        document.getElementById("t_lecture").innerHTML = "Lecture";
+                        if (document.getElementById("t_nolecture"))
+                            document.getElementById("t_nolecture").innerHTML = "There are no lecture in the system.";
                         if (document.getElementById("t_edit"))
                             document.getElementById("t_edit").innerHTML = "Edit";
                         if (document.getElementById("t_delete"))
@@ -65,7 +68,9 @@
                         document.getElementById("t_logout").value = "登出";
                         document.getElementById("t_lecture").innerHTML = "講課";
                         if (document.getElementById("t_cmaterial"))
-                            document.getElementById("t_cmaterial").innerHTML = "建立講課";
+                            document.getElementById("t_cmaterial").innerHTML = "建立講義";
+                        if (document.getElementById("t_nolecture"))
+                            document.getElementById("t_nolecture").innerHTML = "系統裡沒有任何講義";
                         if (document.getElementById("t_edit"))
                             document.getElementById("t_edit").innerHTML = "編輯";
                         if (document.getElementById("t_delete"))

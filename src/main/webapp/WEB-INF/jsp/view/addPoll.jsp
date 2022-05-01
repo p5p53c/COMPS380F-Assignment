@@ -3,7 +3,7 @@
     <head>
         <title>Customer Support</title>
     </head>
-    <body>
+    <body onLoad="init()">
         <c:url var="logoutUrl" value="/cslogout"/>
         <form action="${logoutUrl}" method="post">
             <input type="submit" value="Log out" />
