@@ -124,7 +124,7 @@
                         document.getElementById("Vote").value = "投票";
                         document.getElementById("t_votes").innerHTML = "總投票數：";
                         document.getElementById("t_return").innerHTML = "返回到課程列表";
-                        document.getElementById("submitWarning").innerHTML = "你必須在投票前選擇選項！";
+                        document.getElementById("submitWarning").innerHTML = "你必須在投票前作出選擇！";
                         localStorage.setItem("language", "中文");
                         break;
                 }
