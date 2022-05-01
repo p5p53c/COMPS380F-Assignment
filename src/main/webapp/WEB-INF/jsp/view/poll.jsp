@@ -112,6 +112,7 @@
                         document.getElementById("Vote").value = "Vote";
                         document.getElementById("t_votes").innerHTML = "Total votes:";
                         document.getElementById("t_return").innerHTML = "Return to Course List";
+                        document.getElementById("submitWarning").innerHTML = "You must choose one answer before submit!";
                         localStorage.setItem("language", "English");
                         break;
                     case "中文":
@@ -123,6 +124,7 @@
                         document.getElementById("Vote").value = "投票";
                         document.getElementById("t_votes").innerHTML = "總投票數：";
                         document.getElementById("t_return").innerHTML = "返回到課程列表";
+                        document.getElementById("submitWarning").innerHTML = "你必須在投票前選擇選項！";
                         localStorage.setItem("language", "中文");
                         break;
                 }

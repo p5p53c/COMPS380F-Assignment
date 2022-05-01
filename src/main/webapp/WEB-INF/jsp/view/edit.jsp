@@ -180,8 +180,8 @@
                         document.getElementById("t_material").innerHTML = "Material";
                         document.getElementById("t_materialname").innerHTML = "Material Name";
                         document.getElementById("t_materialbody").innerHTML = "Body";
-                        //if (document.getElementById("t_attachments"))
-                            //document.getElementById("t_attachments").innerHTML = "Attachments:";
+                        if (document.getElementById("t_attachments"))
+                            document.getElementById("t_attachments").innerHTML = "Attachments:";
                         document.getElementById("t_addattachments").innerHTML = "Add attachments";
                         document.getElementsByClassName("drop-zone__prompt")[0].innerHTML = "Drop file here or click to upload";
                         document.getElementById("t_submit").value = "Save";
@@ -193,8 +193,8 @@
                         document.getElementById("t_material").innerHTML = "講義";
                         document.getElementById("t_materialname").innerHTML = "講義名稱";
                         document.getElementById("t_materialbody").innerHTML = "內容";
-                        //if (document.getElementById("t_attachments"))
-                            //document.getElementById("t_attachments").innerHTML = "附件：";
+                        if (document.getElementById("t_attachments"))
+                            document.getElementById("t_attachments").innerHTML = "附件：";
                         document.getElementById("t_addattachments").innerHTML = "加入附件";
                         document.getElementsByClassName("drop-zone__prompt")[0].innerHTML = "拖拉檔案到此處上載";
                         document.getElementById("t_submit").value = "儲存";

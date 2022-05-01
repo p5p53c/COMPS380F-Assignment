@@ -4,7 +4,7 @@
     <body onload="init()">
         <c:url var="logoutUrl" value="/cslogout"/>
         <form action="${logoutUrl}" method="post">
-            <input id="t_logout" type="submit" value="Log out" />
+            <input class="t_button" type="submit" value="Log out" />
             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
             [<a href="#" onclick="trans(this.innerHTML)">English</a>
             |<a href="#" onclick="trans(this.innerHTML)">中文</a>]
@@ -31,15 +31,15 @@
                                 </c:forEach>
                             </td>
                             <td>
-                                [<a id="t_edit" href="<c:url value="/user/edit/${user.username}" />">Edit</a>]
-                                [<a id="t_delete" href="<c:url value="/user/delete/${user.username}" />">Delete</a>]
+                                [<a class="t_action" href="<c:url value="/user/edit/${user.username}" />">Edit</a>]
+                                [<a class="t_action" href="<c:url value="/user/delete/${user.username}" />">Delete</a>]
                             </td>
                         </tr>
                     </c:forEach>
                 </table>
             </c:otherwise>
         </c:choose>
-        <br/><input id="t_back" type=button value="Back" onCLick="javascript:history.go(-1)">
+        <br/><input class="t_button" type=button value="Back" onCLick="javascript:history.go(-1)">
         <script>
             const localStorage = window.localStorage;
             function init() {
@@ -50,7 +50,9 @@
             const trans = (language) => {
                 switch (language) {
                     case "English":
-                        document.getElementById("t_logout").value = "Log out";
+                        var button = document.getElementsByClassName("t_button");
+                        button[0].value = "Log out";
+                        button[1].value = "Back";
                         document.getElementById("t_users").innerHTML = "Users";
                         document.getElementById("t_cuser").innerHTML = "Create a User";
                         if (document.getElementById("t_nosuer"))
@@ -60,20 +62,17 @@
                         tr[1].innerHTML = "Password";
                         tr[2].innerHTML = "Roles";
                         tr[3].innerHTML = "Action";
-                        if (document.getElementById("t_edit"))
-                            document.getElementById("t_edit").innerHTML = "Edit";
-                        if (document.getElementById("t_delete"))
-                            document.getElementById("t_delete").innerHTML = "Delete";
-                        /*if (document.getElementById("t_edit"))
-                         document.getElementById("t_edit").innerHTML = "Edit";
-                         if (document.getElementById("t_delete"))
-                         document.getElementById("t_delete").innerHTML = "Delete";*/
-                        document.getElementById("t_back").value = "Back";
+                        var action = document.getElementsByClassName("t_action");
+                        if (action) {
+                            action[0].innerHTML = "Edit";
+                            action[1].innerHTML = "Delete";
+                        }
                         localStorage.setItem("language", "English");
-                        console.log("localStorage: " + localStorage.getItem("language"));
                         break;
                     case "中文":
-                        document.getElementById("t_logout").value = "登出";
+                        var button = document.getElementsByClassName("t_button");
+                        button[0].value = "登出";
+                        button[1].value = "返回";
                         document.getElementById("t_users").innerHTML = "使用者";
                         document.getElementById("t_cuser").innerHTML = "建立使用者";
                         if (document.getElementById("t_nosuer"))
@@ -83,17 +82,12 @@
                         tr[1].innerHTML = "密碼";
                         tr[2].innerHTML = "身份";
                         tr[3].innerHTML = "動作";
-                        if (document.getElementById("t_edit"))
-                            document.getElementById("t_edit").innerHTML = "編輯";
-                        if (document.getElementById("t_delete"))
-                            document.getElementById("t_delete").innerHTML = "刪除";
-                        /*if (document.getElementById("t_edit"))
-                         document.getElementById("t_edit").innerHTML = "Edit";
-                         if (document.getElementById("t_delete"))
-                         document.getElementById("t_delete").innerHTML = "Delete";*/
-                        document.getElementById("t_back").value = "返回";
+                        var action = document.getElementsByClassName("t_action");
+                        if (action) {
+                            action[0].innerHTML = "編輯";
+                            action[1].innerHTML = "刪除";
+                        }
                         localStorage.setItem("language", "中文");
-                        console.log("localStorage: " + localStorage.getItem("language"));
                         break;
                 }
             }

@@ -8,12 +8,12 @@
         [<a href="#" onclick="trans(this.innerHTML)">English</a>
         |<a href="#" onclick="trans(this.innerHTML)">中文</a>]
         <form action="cslogin" method="POST">
-            <label id="t_username" for="username">Username:</label><br/>
+            <label class="t_form" for="username">Username:</label><br/>
             <input type="text" id="username" name="username" /><br/><br/>
-            <label id="t_password" for="password">Password:</label><br/>
+            <label class="t_form" for="password">Password:</label><br/>
             <input type="password" id="password" name="password" /><br/><br/>
             <input type="checkbox" id="remember-me" name="remember-me" />
-            <label id="t_remember" for="remember-me">Remember me</label><br/><br/>
+            <label class="t_form" for="remember-me">Remember me</label><br/><br/>
             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
             <input id="t_login" type="submit" value="Log In"/>
         </form>
@@ -40,10 +40,11 @@
                 console.log("translate");
                 switch (language) {
                     case "English":
+                        var form = document.getElementsByClassName("t_form");
+                        form[0].innerHTML = "Username:";
+                        form[1].innerHTML = "Password:";
+                        form[2].innerHTML = "Remember me";
                         document.getElementById("title").innerHTML = "Online Course Login";
-                        document.getElementById("t_username").innerHTML = "Username:";
-                        document.getElementById("t_password").innerHTML = "Password:";
-                        document.getElementById("t_remember").innerHTML = "Remember me";
                         document.getElementById("t_login").value = "Log In";
                         document.getElementById("t_signup").value = "Sign up";
                         if (document.getElementById("t_error"))
@@ -55,9 +56,10 @@
                         break;
                     case "中文":
                         document.getElementById("title").innerHTML = "網上課程登入";
-                        document.getElementById("t_username").innerHTML = "用戶名稱：";
-                        document.getElementById("t_password").innerHTML = "密碼：";
-                        document.getElementById("t_remember").innerHTML = "記住我";
+                        var form = document.getElementsByClassName("t_form");
+                        form[0].innerHTML = "用戶名稱：";
+                        form[1].innerHTML = "密碼：";
+                        form[2].innerHTML = "記住我";
                         document.getElementById("t_login").value = "登入";
                         document.getElementById("t_signup").value = "註冊";
                         //document.getElementById("t_error").innerHTML = "登入失敗";

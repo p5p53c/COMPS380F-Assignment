@@ -57,7 +57,7 @@
     <body onLoad="init()">
         <c:url var="logoutUrl" value="/cslogout" />
         <form action="${logoutUrl}" method="post">
-            <input id="t_logout" type="submit" value="Log out" />
+            <input class="t_button" type="submit" value="Log out" />
             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
             [<a href="#" onclick="trans(this.innerHTML)">English</a>
             |<a href="#" onclick="trans(this.innerHTML)">中文</a>]
@@ -65,11 +65,11 @@
 
         <h2 id="t_cmaterial">Create a Material</h2>
         <form:form method="POST" enctype="multipart/form-data" modelAttribute="materialForm">
-            <form:label id="t_subject" path="materialname">Subject</form:label><br />
+            <form:label class="t_form" path="materialname">Subject</form:label><br />
             <form:input type="text" path="materialname" /><br /><br />
-            <form:label id="t_body" path="materialbody">Body</form:label><br />
+            <form:label class="t_form" path="materialbody">Body</form:label><br />
             <form:textarea path="materialbody" rows="5" cols="30" /><br /><br />
-            <b id="t_attachments">Attachments</b><br />
+            <b class="t_form">Attachments</b><br />
             <!-- <input type="file" name="attachments" multiple="multiple" /><br /><br /> -->
 
             <div class="drop-zone">
@@ -78,8 +78,8 @@
             </div>
             <br/>
             <input type="hidden" name="courseid" value="${param.courseid}" />
-            <input id="t_submit" type="submit" value="Submit" />
-            <input id="t_back" type=button value="Back" onCLick="javascript:history.go(-1)">
+            <input class="t_button" type="submit" value="Submit" />
+            <input class="t_button" type=button value="Back" onCLick="javascript:history.go(-1)">
         </form:form>
 
         <script>
@@ -166,25 +166,29 @@
             const trans = (language) => {
                 switch (language) {
                     case "English":
-                        document.getElementById("t_logout").value = "Log out";
-                        document.getElementById("t_cmaterial").innerHTML = "Create a Material";
-                        document.getElementById("t_subject").innerHTML = "Subject";
-                        document.getElementById("t_body").innerHTML = "Body";
-                        document.getElementById("t_attachments").innerHTML = "Attachments";
+                        var button = document.getElementsByClassName("t_button");
+                        button[0].value = "Log out";
+                        button[1].value = "Submit";
+                        button[2].value = "Back";
+                        document.getElementsByTagName("h2")[0].innerHTML = "Create a Material";
+                        var form = document.getElementsByClassName("t_form");
+                        form[0].innerHTML = "Subject";
+                        form[1].innerHTML = "Body";
+                        form[2].innerHTML = "Attachments";
                         document.getElementsByClassName("drop-zone__prompt")[0].innerHTML = "Drop file here or click to upload";
-                        document.getElementById("t_submit").value = "Submit";
-                        document.getElementById("t_back").value = "Back";
                         localStorage.setItem("language", "English");
                         break;
                     case "中文":
-                        document.getElementById("t_logout").value = "登出";
-                            document.getElementById("t_cmaterial").innerHTML = "建立講課";
-                        document.getElementById("t_subject").innerHTML = "標題";
-                        document.getElementById("t_body").innerHTML = "內容";
-                        document.getElementById("t_attachments").innerHTML = "附件";
+                        var button = document.getElementsByClassName("t_button");
+                        button[0].value = "登出";
+                        button[1].value = "提交";
+                        button[2].value = "返回";
+                        document.getElementsByTagName("h2")[0].innerHTML = "建立講課";
+                        var form = document.getElementsByClassName("t_form");
+                        form[0].innerHTML = "標題";
+                        form[1].innerHTML = "內容";
+                        form[2].innerHTML = "附件";
                         document.getElementsByClassName("drop-zone__prompt")[0].innerHTML = "拖拉檔案到此處上載";
-                        document.getElementById("t_submit").value = "提交";
-                        document.getElementById("t_back").value = "返回";
                         localStorage.setItem("language", "中文");
                         break;
                 }
