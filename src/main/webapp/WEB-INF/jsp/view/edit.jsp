@@ -2,7 +2,7 @@
 <html>
 
     <head>
-        <title>Customer Support</title>
+        <title>Online Course Website</title>
         <style>
             .drop-zone {
                 max-width: 200px;
