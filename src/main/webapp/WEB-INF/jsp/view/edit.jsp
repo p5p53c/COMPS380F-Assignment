@@ -57,17 +57,17 @@
     <body onLoad="init()">
         <c:url var="logoutUrl" value="/cslogout" />
         <form action="${logoutUrl}" method="post">
-            <input id="t_logout" type="submit" value="Log out" />
+            <input class="translate" type="submit" value="Log out" />
             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
             [<a href="#" onclick="trans(this.innerHTML)">English</a>
-            |<a href="#" onclick="trans(this.innerHTML)">中文</a>]
+            | <a href="#" onclick="trans(this.innerHTML)">中文</a>]
         </form>
 
-        <h2><span id="t_material">Material</span> #${material.id}</h2>
+        <h2><span class="translate">Material</span> #${material.id}</h2>
         <form:form method="POST" enctype="multipart/form-data" modelAttribute="materialForm">
-            <form:label id="t_materialname" path="materialname">Material Name</form:label><br />
+            <form:label class="translate" path="materialname">Material Name</form:label><br />
             <form:input type="text" path="materialname" /><br /><br />
-            <form:label id="t_materialbody" path="materialbody">Body</form:label><br />
+            <form:label class="translate" path="materialbody">Body</form:label><br />
             <form:textarea path="materialbody" rows="5" cols="30" /><br /><br />
             <c:if test="${fn:length(material.attachments) > 0}">
                 <b id="t_attachments">Attachments:</b><br />
@@ -81,7 +81,7 @@
                     </c:forEach>
                 </ul>
             </c:if>
-            <b id="t_addattachments">Add attachments</b><br />
+            <b class="translate">Add attachments</b><br />
             <!-- <input type="file" name="attachments" multiple="multiple" /><br /><br /> -->
 
             <div class="drop-zone">
@@ -89,7 +89,8 @@
                 <input type="file" name="attachments" class="drop-zone__input" multiple="multiple">
             </div>
             <br/>
-            <input id="t_submit" type="submit" value="Save" /> <input id="t_back" type=button value="Back" onCLick="javascript:history.go(-1)">
+            <input class="translate" type="submit" value="Save" /> 
+            <input class="translate" type=button value="Back" onCLick="javascript:history.go(-1)">
         </form:form>
 
         <script>
@@ -174,31 +175,32 @@
                 }
             }
             const trans = (language) => {
+                var translate = document.getElementsByClassName("translate");
                 switch (language) {
                     case "English":
-                        document.getElementById("t_logout").value = "Log out";
-                        document.getElementById("t_material").innerHTML = "Material";
-                        document.getElementById("t_materialname").innerHTML = "Material Name";
-                        document.getElementById("t_materialbody").innerHTML = "Body";
+                        translate[0].value = "Log out";
+                        translate[1].innerHTML = "Material";
+                        translate[2].innerHTML = "Material Name";
+                        translate[3].innerHTML = "Body";
+                        translate[4].innerHTML = "Add attachments";
+                        translate[5].value = "Save";
+                        translate[6].value = "Back";
                         if (document.getElementById("t_attachments"))
                             document.getElementById("t_attachments").innerHTML = "Attachments:";
-                        document.getElementById("t_addattachments").innerHTML = "Add attachments";
                         document.getElementsByClassName("drop-zone__prompt")[0].innerHTML = "Drop file here or click to upload";
-                        document.getElementById("t_submit").value = "Save";
-                        document.getElementById("t_back").value = "Back";
                         localStorage.setItem("language", "English");
                         break;
                     case "中文":
-                        document.getElementById("t_logout").value = "登出";
-                        document.getElementById("t_material").innerHTML = "講義";
-                        document.getElementById("t_materialname").innerHTML = "講義名稱";
-                        document.getElementById("t_materialbody").innerHTML = "內容";
+                        translate[0].value = "登出";
+                        translate[1].innerHTML = "講義";
+                        translate[2].innerHTML = "講義名稱";
+                        translate[3].innerHTML = "內容";
+                        translate[4].innerHTML = "加入附件";
+                        translate[5].value = "儲存";
+                        translate[6].value = "返回";
                         if (document.getElementById("t_attachments"))
                             document.getElementById("t_attachments").innerHTML = "附件：";
-                        document.getElementById("t_addattachments").innerHTML = "加入附件";
                         document.getElementsByClassName("drop-zone__prompt")[0].innerHTML = "拖拉檔案到此處上載";
-                        document.getElementById("t_submit").value = "儲存";
-                        document.getElementById("t_back").value = "返回";
                         localStorage.setItem("language", "中文");
                         break;
                 }

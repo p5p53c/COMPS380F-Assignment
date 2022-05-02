@@ -38,20 +38,20 @@
     <body onload="init()">
         <c:url var="logoutUrl" value="/cslogout"/>
         <form action="${logoutUrl}" method="post">
-            <input id="t_logout" type="submit" value="Log out" />
+            <input class="translate" type="submit" value="Log out" />
             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
             [<a href="#" onclick="trans(this.innerHTML)">English</a>
-        |<a href="#" onclick="trans(this.innerHTML)">中文</a>]
+            | <a href="#" onclick="trans(this.innerHTML)">中文</a>]
         </form>
 
-        <h2><span id="t_poll">Poll</span> ${poll.id}: <c:out value="${poll.pollQuestion}" /></h2>
-        <security:authorize access="hasRole('ADMIN')">
+        <h2><span class="translate">Poll</span> ${poll.id}: <c:out value="${poll.pollQuestion}" /></h2>
+        <security:authorize access="hasRole('ADMIN')" var="hasRole">
             [<a id="t_delete" href="<c:url value="/poll/delete/${poll.id}" />">Delete</a>]<br/>
         </security:authorize>
         <form:form method="POST" modelAttribute="voteForm">
             <table>
                 <tr>
-                    <th><form:label id="t_choose" path="voteTarget" >Choose one:</form:label></th>
+                    <th><form:label class="translate" path="voteTarget" >Choose one:</form:label></th>
                     </tr>
                     <tr>
                         <td id="voteRow1"><form:radiobutton path="voteTarget" value="${poll.pollMC1}" label="${poll.pollMC1}" onClick="openSubmit(this)" />
@@ -82,7 +82,8 @@
                 <form:hidden path="pollId" value="${poll.id}" />
                 <form:hidden path="username" value="${currentUser}" />
                 <tr>
-                    <td><input type="submit" value="Vote" id="Vote"  disabled=true/><div class="voteNo"><span id="t_votes">Total votes:</span> ${totalVotes}</div></td>
+                    <td><input id="Vote" class="translate" type="submit" value="Vote" disabled=true/>
+                        <div class="voteNo"><span class="translate">Total votes:</span> ${totalVotes}</div></td>
                 </tr>
             </table>
         </form:form>
@@ -92,7 +93,7 @@
             This area is for comments 
         -->
 
-        <a id="t_return" href="<c:url value="/course" />">Return to Course List</a>
+        <a class="translate" href="<c:url value="/course" />">Return to Course List</a>
 
         <script>
             const localStorage = window.localStorage;
@@ -102,28 +103,29 @@
                 }
             }
             const trans = (language) => {
+                var translate = document.getElementsByClassName("translate");
                 switch (language) {
                     case "English":
-                        document.getElementById("t_logout").value = "Log out";
-                        document.getElementById("t_poll").innerHTML = "Poll";
-                        if (document.getElementById("t_delete"))
+                        translate[0].value = "Log out";
+                        translate[1].innerHTML = "Poll";
+                        translate[2].innerHTML = "Choose one:";
+                        translate[3].value = "Vote";
+                        translate[4].innerHTML = "Total votes:";
+                        translate[5].innerHTML = "Return to Course List";
+                        if (${hasRole})
                             document.getElementById("t_delete").innerHTML = "Delete";
-                        document.getElementById("t_choose").innerHTML = "Choose one:";
-                        document.getElementById("Vote").value = "Vote";
-                        document.getElementById("t_votes").innerHTML = "Total votes:";
-                        document.getElementById("t_return").innerHTML = "Return to Course List";
                         document.getElementById("submitWarning").innerHTML = "You must choose one answer before submit!";
                         localStorage.setItem("language", "English");
                         break;
                     case "中文":
-                        document.getElementById("t_logout").value = "登出";
-                        document.getElementById("t_poll").innerHTML = "投票";
-                        if (document.getElementById("t_delete"))
+                        translate[0].value = "登出";
+                        translate[1].innerHTML = "投票";
+                        translate[2].innerHTML = "選擇一個：";
+                        translate[3].value = "投票";
+                        translate[4].innerHTML = "總投票數：";
+                        translate[5].innerHTML = "返回到課程列表";
+                        if (${hasRole})
                             document.getElementById("t_delete").innerHTML = "刪除";
-                        document.getElementById("t_choose").innerHTML = "選擇一個：";
-                        document.getElementById("Vote").value = "投票";
-                        document.getElementById("t_votes").innerHTML = "總投票數：";
-                        document.getElementById("t_return").innerHTML = "返回到課程列表";
                         document.getElementById("submitWarning").innerHTML = "你必須在投票前作出選擇！";
                         localStorage.setItem("language", "中文");
                         break;
