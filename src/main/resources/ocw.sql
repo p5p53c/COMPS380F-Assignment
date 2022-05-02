@@ -106,5 +106,8 @@ INSERT INTO polls(pollquestion, pollMC1) VALUES ('Take attendance', 'Checked');
 INSERT INTO polls(pollquestion, pollMC1, pollMC2) VALUES ('Choose the class you prefer to join', 'L01', 'L02');
 INSERT INTO polls(pollquestion, pollMC1, pollMC2, pollMC3) VALUES ('Which date do you prefer for the mid-term test?', '1/5', '2/5', '3/5');
 INSERT INTO polls(pollquestion, pollMC1, pollMC2, pollMC3, pollMC4) VALUES ('3 + 3 / 3 * 3 = ?', '2', '3', '6', '2/3');
+INSERT INTO polls(pollquestion, pollMC1, pollMC2, pollMC3, pollMC4) VALUES ('Never gonna', 'Give you up', 'Let you down', 'Run around', 'Desert you');
 
 INSERT INTO votes(pollid, username, votetarget) VALUES (1, 'keith', 'Checked');
+INSERT INTO votes(pollid, username, votetarget) VALUES (2, 'keith', 'L01');
+INSERT INTO votes(pollid, username, votetarget) VALUES (2, 'peter', 'L02');

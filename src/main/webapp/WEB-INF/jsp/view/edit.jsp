@@ -2,7 +2,7 @@
 <html>
 
     <head>
-        <title>Customer Support</title>
+        <title>Online Course Website</title>
         <style>
             .drop-zone {
                 max-width: 200px;
@@ -54,21 +54,23 @@
         </style>
     </head>
 
-    <body>
+    <body onLoad="init()">
         <c:url var="logoutUrl" value="/cslogout" />
         <form action="${logoutUrl}" method="post">
-            <input type="submit" value="Log out" />
+            <input class="translate" type="submit" value="Log out" />
             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+            [<a href="#" onclick="trans(this.innerHTML)">English</a>
+            | <a href="#" onclick="trans(this.innerHTML)">中文</a>]
         </form>
 
-        <h2>Material #${material.id}</h2>
+        <h2><span class="translate">Material</span> #${material.id}</h2>
         <form:form method="POST" enctype="multipart/form-data" modelAttribute="materialForm">
-            <form:label path="materialname">Material Name</form:label><br />
+            <form:label class="translate" path="materialname">Material Name</form:label><br />
             <form:input type="text" path="materialname" /><br /><br />
-            <form:label path="materialbody">Body</form:label><br />
+            <form:label class="translate" path="materialbody">Body</form:label><br />
             <form:textarea path="materialbody" rows="5" cols="30" /><br /><br />
             <c:if test="${fn:length(material.attachments) > 0}">
-                <b>Attachments:</b><br />
+                <b id="t_attachments">Attachments:</b><br />
                 <ul>
                     <c:forEach items="${material.attachments}" var="attachment">
                         <li>
@@ -79,15 +81,16 @@
                     </c:forEach>
                 </ul>
             </c:if>
-            <b>Add attachments</b><br />
+            <b class="translate">Add attachments</b><br />
             <!-- <input type="file" name="attachments" multiple="multiple" /><br /><br /> -->
 
             <div class="drop-zone">
                 <span class="drop-zone__prompt">Drop file here or click to upload</span>
                 <input type="file" name="attachments" class="drop-zone__input" multiple="multiple">
             </div>
-
-            <input type="submit" value="Save" /> <input type=button value="Back" onCLick="javascript:history.go(-1)">
+            <br/>
+            <input class="translate" type="submit" value="Save" /> 
+            <input class="translate" type=button value="Back" onCLick="javascript:history.go(-1)">
         </form:form>
 
         <script>
@@ -165,6 +168,43 @@
                 }
             }
 
+            const localStorage = window.localStorage;
+            function init() {
+                if (localStorage) {
+                    trans(localStorage.getItem("language"));
+                }
+            }
+            const trans = (language) => {
+                var translate = document.getElementsByClassName("translate");
+                switch (language) {
+                    case "English":
+                        translate[0].value = "Log out";
+                        translate[1].innerHTML = "Material";
+                        translate[2].innerHTML = "Material Name";
+                        translate[3].innerHTML = "Body";
+                        translate[4].innerHTML = "Add attachments";
+                        translate[5].value = "Save";
+                        translate[6].value = "Back";
+                        if (document.getElementById("t_attachments"))
+                            document.getElementById("t_attachments").innerHTML = "Attachments:";
+                        document.getElementsByClassName("drop-zone__prompt")[0].innerHTML = "Drop file here or click to upload";
+                        localStorage.setItem("language", "English");
+                        break;
+                    case "中文":
+                        translate[0].value = "登出";
+                        translate[1].innerHTML = "講義";
+                        translate[2].innerHTML = "講義名稱";
+                        translate[3].innerHTML = "內容";
+                        translate[4].innerHTML = "加入附件";
+                        translate[5].value = "儲存";
+                        translate[6].value = "返回";
+                        if (document.getElementById("t_attachments"))
+                            document.getElementById("t_attachments").innerHTML = "附件：";
+                        document.getElementsByClassName("drop-zone__prompt")[0].innerHTML = "拖拉檔案到此處上載";
+                        localStorage.setItem("language", "中文");
+                        break;
+                }
+            }
         </script>
     </body>
 
