@@ -16,4 +16,5 @@ public interface VoteRepository extends JpaRepository<Vote, VoteId> {
     long countByPollid(long pollid);
 
     long countByPollidAndVoteTarget(long pollid, String voteTarget);
+
 }

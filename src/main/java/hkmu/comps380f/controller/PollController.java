@@ -167,8 +167,7 @@ public class PollController {
     }
 
     @GetMapping("/delete/{pollId}")
-    public String delete(@PathVariable("pollId") long pollId)
-            throws PollNotFound {
+    public String delete(@PathVariable("pollId") long pollId) throws PollNotFound {
         pollService.delete(pollId);
         return "redirect:/course/list";
     }

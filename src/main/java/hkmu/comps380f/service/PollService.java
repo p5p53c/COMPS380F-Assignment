@@ -1,8 +1,10 @@
 package hkmu.comps380f.service;
 
 import hkmu.comps380f.dao.PollRepository;
+import hkmu.comps380f.dao.VoteRepository;
 import hkmu.comps380f.exception.PollNotFound;
 import hkmu.comps380f.model.Poll;
+import hkmu.comps380f.model.Vote;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -14,6 +16,9 @@ public class PollService {
 
     @Resource
     private PollRepository pollRepo;
+
+    @Resource
+    private VoteRepository voteRepo;
 
     @Transactional
     public List<Poll> getPolls() {
@@ -45,8 +50,12 @@ public class PollService {
     @Transactional(rollbackFor = PollNotFound.class)
     public void delete(long id) throws PollNotFound {
         Poll deletedPoll = pollRepo.findById(id).orElse(null);
+        List<Vote> deletedVotes = voteRepo.findByPollid(id);
         if (deletedPoll == null) {
             throw new PollNotFound();
+        }
+        for (Vote vote : deletedVotes) {
+            voteRepo.delete(vote);
         }
         pollRepo.delete(deletedPoll);
     }
