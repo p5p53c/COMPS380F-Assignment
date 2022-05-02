@@ -58,8 +58,7 @@
                         translate[1].innerHTML = "Users";
                         translate[2].innerHTML = "Create a User";
                         translate[3].value = "Back";
-                        if (document.getElementById("t_nosuer"))
-                            tr[0].innerHTML = "Username";
+                        tr[0].innerHTML = "Username";
                         tr[1].innerHTML = "Password";
                         tr[2].innerHTML = "Roles";
                         tr[3].innerHTML = "Action";
@@ -67,8 +66,8 @@
                             user[0].innerHTML = "There are no users in the system.";
                         else
                             for (var i = 0; i < action.length; i += 2) {
-                                action[0].innerHTML = "Edit";
-                                action[1].innerHTML = "Delete";
+                                action[i].innerHTML = "Edit";
+                                action[i + 1].innerHTML = "Delete";
                             }
                         localStorage.setItem("language", "English");
                         break;

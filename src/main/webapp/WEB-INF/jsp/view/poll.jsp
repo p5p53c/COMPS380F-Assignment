@@ -126,7 +126,7 @@
                         translate[5].innerHTML = "返回到課程列表";
                         if (${hasRole})
                             document.getElementById("t_delete").innerHTML = "刪除";
-                        document.getElementById("submitWarning").innerHTML = "你必須在投票前作出選擇！";
+                        document.getElementById("submitWarning").innerHTML = "你必須在投票前選擇一項！";
                         localStorage.setItem("language", "中文");
                         break;
                 }

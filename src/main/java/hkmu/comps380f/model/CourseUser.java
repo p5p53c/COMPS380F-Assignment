@@ -1,5 +1,8 @@
 package hkmu.comps380f.model;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -22,7 +25,13 @@ public class CourseUser implements Serializable {
 
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER,
             cascade = CascadeType.ALL, orphanRemoval = true)
+    @Fetch(FetchMode.SUBSELECT)
     private List<UserRole> roles = new ArrayList<>();
+
+    @OneToMany(mappedBy = "username", fetch = FetchType.EAGER,
+            cascade = CascadeType.ALL, orphanRemoval = true)
+    @Fetch(FetchMode.SUBSELECT)
+    private List<Vote> votes = new ArrayList<>();
 
     public CourseUser() {
     }
@@ -87,6 +96,10 @@ public class CourseUser implements Serializable {
         for (String role : roles) {
             this.roles.add(new UserRole(this, role));
         }
+    }
+
+    public List<Vote> getVotes() {
+        return votes;
     }
 
 }
