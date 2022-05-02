@@ -16,6 +16,10 @@ public class Vote implements Serializable {
     @Column(name = "votetarget")
     private String voteTarget;
 
+    @ManyToOne
+    @JoinColumn(name = "username", insertable = false, updatable = false)
+    private CourseUser user;
+
     public long getPollid() {
         return pollid;
     }
