@@ -92,6 +92,7 @@
         <!-- 
             This area is for comments 
         -->
+        <%@ include file="commentlist.jsp" %>
 
         <a class="translate" href="<c:url value="/course" />">Return to Course List</a>
 

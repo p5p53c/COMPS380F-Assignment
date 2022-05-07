@@ -34,6 +34,7 @@
                 </c:forEach>
             </c:otherwise>
         </c:choose>
+        <%@ include file="commentlist.jsp" %>
 
         <input class="translate" type=button value="Back" onCLick="javascript:history.go(-1)">
         <script>
