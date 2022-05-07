@@ -74,8 +74,8 @@ CREATE TABLE votes (
     username VARCHAR(50) NOT NULL,
     votetarget VARCHAR(50) NOT NULL,
     PRIMARY KEY(pollid, username),
-    FOREIGN KEY (pollid) REFERENCES polls(id) ON DELETE CASCADE,
-    FOREIGN KEY (username) REFERENCES users(username) ON DELETE CASCADE
+    FOREIGN KEY (pollid) REFERENCES polls(id),
+    FOREIGN KEY (username) REFERENCES users(username)
 );
 
 INSERT INTO users VALUES ('peter', '{noop}peterpw', 'peter', 'address', 'phone');
