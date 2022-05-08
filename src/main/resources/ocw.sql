@@ -98,7 +98,7 @@ INSERT INTO course(coursetitle) VALUES ('Mobile App');
 INSERT INTO lecture(lecturenumber, lecturetitle, courseid) VALUES (1, 'Basics', 2);
 INSERT INTO lecture(lecturenumber, lecturetitle, courseid) VALUES (2, 'Android - Fundamentals', 2);
 
-INSERT INTO comments(courseid, username, commentbody) VALUES (1, 'peter', 'Test 1');
+INSERT INTO comments(username, commentbody) VALUES ('peter', 'Test 1');
 
 INSERT INTO polls(pollquestion, pollMC1) VALUES ('Take attendance', 'Checked');
 INSERT INTO polls(pollquestion, pollMC1, pollMC2) VALUES ('Choose the class you prefer to join', 'L01', 'L02');

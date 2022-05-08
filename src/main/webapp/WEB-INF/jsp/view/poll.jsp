@@ -93,6 +93,7 @@
             This area is for comments 
         -->
         <jsp:include page="/comment/list" />
+        <jsp:include page="/comment/create"/>
 
         <a class="translate" href="<c:url value="/course" />">Return to Course List</a>
 

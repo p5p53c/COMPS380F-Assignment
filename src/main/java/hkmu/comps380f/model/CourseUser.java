@@ -33,6 +33,11 @@ public class CourseUser implements Serializable {
     @Fetch(FetchMode.SUBSELECT)
     private List<Vote> votes = new ArrayList<>();
 
+    @OneToMany(mappedBy = "username", fetch = FetchType.EAGER,
+            cascade = CascadeType.ALL, orphanRemoval = true)
+    @Fetch(FetchMode.SUBSELECT)
+    private List<Comment> comments = new ArrayList<>();
+
     public CourseUser() {
     }
 

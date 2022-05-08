@@ -23,11 +23,17 @@
             <tr>
                 <td>Username</td>
                 <td>Comment body</td>
+                <security:authorize access="hasRole('ADMIN')" var="hasRole">
+                    <td>Action</td>
+                </security:authorize>
             </tr>
             <c:forEach items="${commentDatabase}" var="comment">
                 <tr>
                     <td>${comment.username}</td>
                     <td>${comment.commentbody}</td>
+                    <security:authorize access="hasRole('ADMIN')" var="hasRole">
+                        <td>[<a class="hasRole" href="<c:url value="/comment/delete/${comment.id}" />">Delete</a>]</td>
+                    </security:authorize>
                 </tr>
             </c:forEach>
         </table>
