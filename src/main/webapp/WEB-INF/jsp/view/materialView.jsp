@@ -26,6 +26,8 @@
                     <c:out value="${attachment.name}" /></a>
             </c:forEach><br /><br />
         </c:if>
+        <jsp:include page="/comment/list" />
+        <jsp:include page="/comment/create"/>
         <input class="translate" type=button value="Back" onCLick="javascript:history.go(-1)">
         <script>
             const localStorage = window.localStorage;

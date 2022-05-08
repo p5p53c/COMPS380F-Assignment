@@ -1,10 +1,13 @@
 package hkmu.comps380f.service;
 
 import hkmu.comps380f.dao.CommentRepository;
+import hkmu.comps380f.dao.CourseUserRepository;
 import hkmu.comps380f.exception.CommentNotFound;
 import hkmu.comps380f.model.Comment;
+import hkmu.comps380f.model.CourseUser;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.annotation.Resource;
 import java.io.IOException;
@@ -15,6 +18,9 @@ public class CommentService {
 
     @Resource
     private CommentRepository commentRepo;
+
+    @Resource
+    private CourseUserRepository courseUserRepo;
 
     @Transactional
     public List<Comment> getComments() {
@@ -37,10 +43,19 @@ public class CommentService {
     }
 
     @Transactional(rollbackFor = CommentNotFound.class)
-    public void delete(long id) throws CommentNotFound {
+    public void delete(String username, long id) throws CommentNotFound {
         Comment deletedComment = commentRepo.findById(id).orElse(null);
         if (deletedComment == null)
             throw new CommentNotFound();
-        commentRepo.delete(deletedComment);
+
+        CourseUser user = courseUserRepo.findById(username).orElse(null);
+        for (Comment comment: user.getComments()) {
+            if (comment.getId() == id) {
+                user.deleteComment(comment);
+                courseUserRepo.save(user);
+                return;
+            }
+        }
+        throw new CommentNotFound();
     }
 }

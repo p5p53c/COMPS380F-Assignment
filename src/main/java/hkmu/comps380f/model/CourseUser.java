@@ -107,4 +107,12 @@ public class CourseUser implements Serializable {
         return votes;
     }
 
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void deleteComment(Comment comment) {
+        comment.setUsername(null);
+        this.comments.remove(comment);
+    }
 }

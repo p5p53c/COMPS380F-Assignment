@@ -74,7 +74,8 @@ public class CommentController {
 
     @GetMapping("/delete/{commentId}")
     public String deleteTicket(@PathVariable("commentId") long commentId) throws CommentNotFound {
-        commentService.delete(commentId);
+        String username = commentService.getComment(commentId).getUsername();
+        commentService.delete(username, commentId);
         return "redirect:/comment/list";
     }
 }
