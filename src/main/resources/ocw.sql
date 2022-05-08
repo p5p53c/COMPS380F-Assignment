@@ -51,11 +51,9 @@ CREATE TABLE attachment (
 
 CREATE TABLE comments (
     id INTEGER NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
-    courseid INTEGER NOT NULL,
     username VARCHAR(50) NOT NULL,
     commentbody VARCHAR(50) NOT NULL,
     PRIMARY KEY (id),
-    FOREIGN KEY (courseid) REFERENCES course(id),
     FOREIGN KEY (username) REFERENCES users(username)
 );
 

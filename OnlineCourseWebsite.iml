@@ -89,5 +89,6 @@
     <orderEntry type="library" name="Maven: org.springframework.data:spring-data-jpa:2.6.2" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.data:spring-data-commons:2.6.2" level="project" />
     <orderEntry type="library" name="Maven: org.slf4j:slf4j-api:1.7.32" level="project" />
+    <orderEntry type="library" name="Java EE 6 (3)" level="project" />
   </component>
 </module>
