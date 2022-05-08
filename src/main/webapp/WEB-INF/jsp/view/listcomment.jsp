@@ -33,7 +33,7 @@
                             <td>${comment.username}</td>
                             <td>${comment.commentbody}</td>
                             <security:authorize access="hasRole('ADMIN')" var="hasRole">
-                                <td>[<a class="hasRole action" href="<c:url value="/comment/delete/${comment.id}" />">Delete</a>]</td>
+                                <td>[<a class="hasRole action" href="<c:url value="/comment/delete/${poll.id}/${comment.id}" />">Delete</a>]</td>
                             </security:authorize>
                         </tr>
                     </c:forEach>
@@ -46,7 +46,6 @@
                 var action = document.getElementsByClassName("action");
                 switch (language) {
                     case "English":
-                        console.log("comment: language: " + localStorage.getItem("language"));
                             listComment[0].innerHTML = "Comments";
                         if (${fn:length(commentDatabase) == 0})
                             document.getElementsByClassName("user")[0].innerHTML = "There are no comment in the system.";
@@ -62,7 +61,6 @@
                         localStorage.setItem("language", "English");
                         break;
                     case "中文":
-                        console.log("comment: language: " + localStorage.getItem("language"));
                             listComment[0].innerHTML = "留言";
                         if (${fn:length(commentDatabase) == 0})
                             document.getElementsByClassName("user")[0].innerHTML = "系統裡沒有任何留言";

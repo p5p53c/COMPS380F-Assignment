@@ -85,10 +85,10 @@ public class CommentController {
         return "redirect:/poll/"+ form.getPollId() ;
     }
 
-    @GetMapping("/delete/{commentId}")
-    public String deleteTicket(@PathVariable("commentId") long commentId) throws CommentNotFound {
+    @GetMapping("/delete/{pollId}/{commentId}")
+    public String deleteTicket(@PathVariable("commentId") long commentId, @PathVariable("pollId")long pollId) throws CommentNotFound {
         String username = commentService.getComment(commentId).getUsername();
         commentService.delete(username, commentId);
-        return "redirect:/comment/list";
+        return "redirect:/poll/"+ pollId;
     }
 }
