@@ -11,8 +11,8 @@
     <title>Title</title>
 </head>
 <body>
-<%--    <form:form method="POST" modelAttribute="comments" action="/OnlineCourseWebsite/comment/create">--%>
-    <form:form method="POST" modelAttribute="comments" action="/OnlineCourseWebsite_war/comment/create">
+    <form:form method="POST" modelAttribute="comments" action="/OnlineCourseWebsite/comment/create">
+<%--    <form:form method="POST" modelAttribute="comments" action="/OnlineCourseWebsite_war/comment/create">--%>
         <form:label path="commentbody">Your comment: </form:label>
         <form:input path="commentbody" type="textarea"/>
         <input type="submit" value="Add Comment"/>
