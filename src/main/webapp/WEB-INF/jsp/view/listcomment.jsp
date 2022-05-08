@@ -77,6 +77,9 @@
                         break;
                 }
             }
+            if (document.URL.indexOf("/comment/list") >= 0){
+            transComment(localStorage.getItem("language"));
+            }
         </script>
     </body>
 </html>
