@@ -8,17 +8,18 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
     <head>
-        <title class="listComment">Comment</title>
+        <title>Comment</title>
     </head>
     <body>
+        <h2 class="listComment">
+            Comments
+        </h2>
         <c:choose>
             <c:when test="${fn:length(commentDatabase) == 0}">
                 <i class="user">There are no comment in the system.</i>
+                <security:authorize access="hasAnyRole('USER','ADMIN')" var="hasRole"/>
             </c:when>
             <c:otherwise>
-                <h1 class="listComment">
-                    Comments
-                </h1>
                 <table>
                     <tr>
                         <td class="listComment">Username</td>
@@ -46,13 +47,12 @@
                 switch (language) {
                     case "English":
                         console.log("comment: language: " + localStorage.getItem("language"));
-                        listComment[0].innerHTML = "Comment";
-                        listComment[1].innerHTML = "Comments";
-                        listComment[2].innerHTML = "Username";
-                        listComment[3].innerHTML = "Comment body";
+                            listComment[0].innerHTML = "Comments";
                         if (${fn:length(commentDatabase) == 0})
                             document.getElementsByClassName("user")[0].innerHTML = "There are no comment in the system.";
                         else {
+                            listComment[1].innerHTML = "Username";
+                            listComment[2].innerHTML = "Comment body";
                             if (${hasRole}) {
                                 action[0].innerHTML = "Action";
                                 for (let i = 1; i < action.length; i++)
@@ -63,16 +63,15 @@
                         break;
                     case "中文":
                         console.log("comment: language: " + localStorage.getItem("language"));
-                        listComment[0].innerHTML = "留言";
-                        listComment[1].innerHTML = "留言";
-                        listComment[2].innerHTML = "使用者名稱";
-                        listComment[3].innerHTML = "留言內容";
+                            listComment[0].innerHTML = "留言";
                         if (${fn:length(commentDatabase) == 0})
                             document.getElementsByClassName("user")[0].innerHTML = "系統裡沒有任何留言";
                         else {
+                            listComment[1].innerHTML = "使用者名稱";
+                            listComment[2].innerHTML = "留言內容";
                             if (${hasRole}) {
                                 action[0].innerHTML = "動作";
-                                for (let i = 1; i < action.length ; i++)
+                                for (let i = 1; i < action.length; i++)
                                     action[i].innerHTML = "刪除";
                             }
                         }

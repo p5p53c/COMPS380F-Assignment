@@ -92,7 +92,7 @@
         <!-- 
             This area is for comments 
         -->
-        <jsp:include page="/comment/list" />
+        <jsp:include page="/comment/list"/>
         <jsp:include page="/comment/create"/>
 
         <a class="translate" href="<c:url value="/course" />">Return to Course List</a>
@@ -117,8 +117,6 @@
                         if (${hasRole})
                             document.getElementById("t_delete").innerHTML = "Delete";
                         document.getElementById("submitWarning").innerHTML = "You must choose one answer before submit!";
-                        transComment(language);
-                        transAdd(language);
                         localStorage.setItem("language", "English");
                         break;
                     case "中文":
@@ -131,11 +129,11 @@
                         if (${hasRole})
                             document.getElementById("t_delete").innerHTML = "刪除";
                         document.getElementById("submitWarning").innerHTML = "你必須在投票前選擇一項！";
-                        transComment(language);
-                        transAdd(language);
                         localStorage.setItem("language", "中文");
                         break;
                 }
+                transAdd(language);
+                transComment(language);
             }
 
             var currentUser = {
