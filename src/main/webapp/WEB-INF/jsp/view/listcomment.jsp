@@ -46,7 +46,7 @@
                 var action = document.getElementsByClassName("action");
                 switch (language) {
                     case "English":
-                            listComment[0].innerHTML = "Comments";
+                        listComment[0].innerHTML = "Comments";
                         if (${fn:length(commentDatabase) == 0})
                             document.getElementsByClassName("user")[0].innerHTML = "There are no comment in the system.";
                         else {
@@ -61,7 +61,7 @@
                         localStorage.setItem("language", "English");
                         break;
                     case "中文":
-                            listComment[0].innerHTML = "留言";
+                        listComment[0].innerHTML = "留言";
                         if (${fn:length(commentDatabase) == 0})
                             document.getElementsByClassName("user")[0].innerHTML = "系統裡沒有任何留言";
                         else {
@@ -77,8 +77,13 @@
                         break;
                 }
             }
-            if (document.URL.indexOf("/comment/list") >= 0){
-            transComment(localStorage.getItem("language"));
+            if (document.URL.indexOf("/comment/list") >= 0) {
+                transComment(localStorage.getItem("language"));
+                var node = document.createElement("a");
+                node.href = "javascript:history.go(-1)";
+                var textnode = document.createTextNode((localStorage.getItem("language")=="English")? "return to prevous page":"返回上一頁");
+                node.appendChild(textnode);
+                document.body.append(node);
             }
         </script>
     </body>
