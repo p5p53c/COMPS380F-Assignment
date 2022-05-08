@@ -17,7 +17,7 @@
         <c:choose>
             <c:when test="${fn:length(commentDatabase) == 0}">
                 <i class="user">There are no comment in the system.</i>
-                <security:authorize access="hasAnyRole('USER','ADMIN')" var="hasRole"/>
+                <security:authorize access="hasRole('ADMIN')" var="hasRole"/>
             </c:when>
             <c:otherwise>
                 <table>
