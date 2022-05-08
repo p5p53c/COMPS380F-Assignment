@@ -39,5 +39,6 @@
         </table>
     </c:otherwise>
 </c:choose>
+<input class="translate" type=button value="Back" onCLick="javascript:history.go(-1);Location.reload();">
 </body>
 </html>
