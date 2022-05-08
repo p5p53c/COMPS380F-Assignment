@@ -33,7 +33,7 @@
                             <td>${comment.username}</td>
                             <td>${comment.commentbody}</td>
                             <security:authorize access="hasRole('ADMIN')" var="hasRole">
-                                <td>[<a class="hasRole action" href="<c:url value="/comment/delete/${poll.id}/${comment.id}" />">Delete</a>]</td>
+                                <td>[<a class="hasRole action" href="<c:url value="/comment/delete/${comment.id}" />">Delete</a>]</td>
                             </security:authorize>
                         </tr>
                     </c:forEach>

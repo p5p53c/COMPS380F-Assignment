@@ -37,8 +37,6 @@ public class CommentController {
 
         private String commentbody;
 
-        private long pollId;
-
         public long getId() {
             return id;
         }
@@ -63,15 +61,6 @@ public class CommentController {
             this.commentbody = commentbody;
         }
 
-        public long getPollId() {
-            return pollId;
-        }
-
-        public void setPollId(long pollId) {
-            this.pollId = pollId;
-        }
-
-
     }
 
     @GetMapping("/create")
@@ -82,13 +71,13 @@ public class CommentController {
     @PostMapping("/create")
     public String create(Form form, Principal principal) throws IOException {
         long commendId = commentService.createComment(principal.getName(), form.getCommentbody());
-        return "redirect:/poll/"+ form.getPollId() ;
+        return "redirect:/comment/list";
     }
 
     @GetMapping("/delete/{pollId}/{commentId}")
     public String deleteTicket(@PathVariable("commentId") long commentId, @PathVariable("pollId")long pollId) throws CommentNotFound {
         String username = commentService.getComment(commentId).getUsername();
         commentService.delete(username, commentId);
-        return "redirect:/poll/"+ pollId;
+        return "redirect:/comment/list";
     }
 }

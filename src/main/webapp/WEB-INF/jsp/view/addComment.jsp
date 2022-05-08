@@ -15,7 +15,6 @@
         <form:form method="POST" modelAttribute="comments" action="/OnlineCourseWebsite/comment/create">
             <form:label class="addComment" path="commentbody">Your comment: </form:label>
             <form:input path="commentbody" type="textarea"/>
-            <form:hidden path="pollId" value ="${poll.id}"/>
             <input class="addComment" type="submit" value="Add Comment"/>
         </form:form>
         <script>
