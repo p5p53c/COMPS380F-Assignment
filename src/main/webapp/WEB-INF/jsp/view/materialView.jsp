@@ -65,6 +65,8 @@
                         localStorage.setItem("language", "中文");
                         break;
                 }
+                transAdd(language);
+                transComment(language);
             }
         </script>
     </body>
